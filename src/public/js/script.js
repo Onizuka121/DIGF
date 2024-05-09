@@ -10,8 +10,15 @@ let id_divs_container = [
 ];
 
 
-document.getElementById("salva-modifiche-btn").addEventListener("click", async function(){
-  console.log(document.getElementById("inputNome").value.trim())
+try {
+  document.getElementById("salva-modifiche-btn").addEventListener("click", async function(){
+    console.log(document.getElementById("inputNome").value.trim())
+})
+} catch (error) {
+  
+}
+
+
 
   fetch("../php/salva-modifiche.php", {
     method : 'POST',
@@ -29,7 +36,7 @@ document.getElementById("salva-modifiche-btn").addEventListener("click", async f
   .then(out => {
     console.log("output" , out);
   });
-});
+
 
 //formatCreditCardNumber();
 
