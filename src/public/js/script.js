@@ -1,42 +1,91 @@
-
-
-let id_divs_nav_bar = ["li-mk-ID", "li-ai-ID", "li-pre-ID", "li-aiuto-ID","li-add-ID"];
+let id_divs_nav_bar = [
+  "li-mk-ID",
+  "li-ai-ID",
+  "li-pre-ID",
+  "li-aiuto-ID",
+  "li-add-ID",
+];
 let id_divs_container = [
   "serialMARKET-PLACE",
   "serialAiContainer",
   "serialPreferitiContainer",
   "serialHelpContainer",
-  "serialAddProductContainer"
+  "serialAddProductContainer",
 ];
-
+document
+  .getElementById("btn-accedi-account")
+  .addEventListener("click", CheckLogin);
 
 try {
-  document.getElementById("salva-modifiche-btn").addEventListener("click", async function(){
-    console.log(document.getElementById("inputNome").value.trim())
-})
-} catch (error) {
-  
+  document
+    .getElementById("salva-modifiche-btn")
+    .addEventListener("click", SalvaModifiche);
+} catch (error) {}
+
+async function CheckLogin() {
+  const formdata_accesso = new FormData();
+  formdata_accesso.append(
+    "email-accesso",
+    document.getElementById("email_field").value.trim()
+  );
+  formdata_accesso.append(
+    "password-accesso",
+    document.getElementById("password_field").value.trim()
+  );
+  fetch("../php/control.php", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: formdata_accesso,
+  })
+    .then((response) => response.json())
+    .then((out) => {
+      if (!out.email_check || !out.pass_check) {
+        let html_toast;
+        if (!out.email_check) {
+          html_toast = "Utente non registrato";
+        } else if (!out.pass_check && out.email_check) {
+          html_toast = "Password non coretta";
+        }
+        $(".toast.toast-logged-output").html(
+          "<div class='toast-body'>" + html_toast + "</div>"
+        );
+        $(".toast.toast-logged-output").toast("show");
+      } else {
+        window.location = "home-page.php";
+      }
+    });
 }
 
-
+async function SalvaModifiche() {
+  const formdata = new FormData();
+  formdata.append("nome", document.getElementById("inputNome").value.trim());
+  formdata.append(
+    "cognome",
+    document.getElementById("inputCognome").value.trim()
+  );
+  formdata.append(
+    "password",
+    document.getElementById("password_field").value.trim()
+  );
 
   fetch("../php/salva-modifiche.php", {
-    method : 'POST',
-    header : {
-      "Content-Type" : "application/json"
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
     },
-    body : {
-       "nome" : document.getElementById("inputNome").value.trim(),
-       "cognome" : document.getElementById("inputCognome").value.trim(),
-       "email" : document.getElementById("inputEmail").value.trim(),
-       "password" : document.getElementById("password_field").value.trim()
-    }
+    body: formdata,
   })
-  .then(response => response.json())
-  .then(out => {
-    console.log("output" , out);
-  });
-
+    .then((response) => response.json())
+    .then((out) => {
+      $(".toast.toast-modifica-profilo").html(
+        "<div class='toast-body'> <span class='material-symbols-outlined align-middle p-1'>person_check</span> Profilo aggiornato</div>"
+      );
+      $(".toast.toast-modifica-profilo").toast("show");
+    });
+  DiscardAll();
+}
 
 //formatCreditCardNumber();
 
@@ -90,12 +139,22 @@ function DiscardAll() {
 }
 
 function ViewSalvaModifiche(number_id = "") {
-  document.getElementById("SaveModificheSerial"+number_id).style.display = "block";
+  let display_invalidpass1 =
+    document.getElementById("invalidPassword1").style.display;
+  let display_invalidpass2 =
+    document.getElementById("invalidPassword2").style.display;
+
+  console.log(display_invalidpass1, display_invalidpass2);
+  if (display_invalidpass1 == "none" && display_invalidpass2 == "none") {
+    document.getElementById("SaveModificheSerial" + number_id).style.display =
+      "block";
+  }
 }
 
 function CheckPass(change = false) {
   if (change) {
     document.getElementById("confermaPasswordSerial").style.display = "block";
+    document.getElementById("SaveModificheSerial").style.display = "none";
   }
   pass = document.getElementById("password_field").value + "";
   if (pass.length >= 10) {
@@ -111,6 +170,7 @@ function CheckPass(change = false) {
 }
 
 function CheckConfPass() {
+  document.getElementById("SaveModificheSerial").style.display = "none";
   if (pass == document.getElementById("password_field2").value) {
     document.getElementById("validPassword2").style.display = "flex";
     document.getElementById("invalidPassword2").style.display = "none";
@@ -122,6 +182,7 @@ function CheckConfPass() {
   }
   document.getElementById("validPassword2").style.display = "none";
   document.getElementById("invalidPassword2").style.display = "flex";
+  document.getElementById("SaveModificheSerial").style.display = "none";
   if (document.getElementById("btn-crea-account-serial") != null)
     document.getElementById("btn-crea-account-serial").disabled = true;
 }
@@ -193,7 +254,6 @@ function CancellaPreferito(id_card_preferito) {
 
 $(document).ready(function () {
   $(".toast").toast();
-
   $(".bookmark-btn").click(function () {
     if ($(this).hasClass("clicked")) {
       $(".toast.toast-aggiunto").html(
@@ -209,19 +269,19 @@ $(document).ready(function () {
   });
 });
 
-function ShowImageInDiv(name_input,mod = false,number_id = null) {
-  var url_image = document.getElementsByName("url-img-"+name_input)[0].value;
+function ShowImageInDiv(name_input, mod = false, number_id = null) {
+  var url_image = document.getElementsByName("url-img-" + name_input)[0].value;
 
   var html =
     " <img src='" +
     url_image +
     "' class='card-img-top w-75 mx-auto' alt='...'>";
 
-  var id_div_img = "container-image-"+name_input;
+  var id_div_img = "container-image-" + name_input;
 
   document.getElementById(id_div_img).innerHTML = html;
 
-  if(mod){
-    ViewSalvaModifiche(number_id); 
+  if (mod) {
+    ViewSalvaModifiche(number_id);
   }
 }

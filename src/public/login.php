@@ -13,48 +13,41 @@ require_once '../public/php/DbControl.php';
   <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/footers/footer-2/assets/css/footer-2.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css"
+    integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="css/style.css">
-  <title>Login Page</title>
+  <title>Login - DigitalForge</title>
 </head>
 
 <body class="body-home-page" id="serialBodyLogin">
-
-  <div class="container d-flex my-5 ps-0 shadow-lg object-fit-contain p-2" style="height: 630px;">
+  <div class="container d-flex mt-5 ps-0 shadow-lg p-0 rounded bg-transparent"
+    style="height: 630px; backdrop-filter: blur(30px) !important;">
     <img src="./img/img.png" class="d-sm-none d-none d-md-none d-xxl-block" style="width: 60%;" alt="...">
-
     <div class="col">
-
-      <form class="form_container object-fit-contain" action='<?= $_SERVER['PHP_SELF'] ?>' method="POST">
+      <form class="form_container object-fit-contain">
+        <div class="toast-container position-fixed top-10 start-70 p-3 font-questrial">
+          <div class="row">
+            <div class="col-auto">
+              <div class="toast toast-logged-output p-1 text-danger text-center fw-bold fs-5" role="alert" aria-live="assertive" aria-atomic="true">
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="title_container" style="height: 2vh;">
           <p class="title font-questrial fs-1">Accedi al tuo account</p>
           <span class="subtitle font-questrial">Inizia subito a consultare i migliori computer del mercato. </span>
         </div>
         <br>
         <div class="input_container">
-
-          <?php
-          if (isset($_POST['btn-submit-accesso'])):
-            $db_control = DBControl::getDB("root", "forge_db");
-            $res = $db_control->checkUser($_POST['email-accesso'], $_POST['password-accesso']);
-            if (!$res):
-              ?>
-              <div class='toast-body text-danger text-center fs-4 font-questrial'>
-                <span class='material-symbols-outlined align-middle'>warning</span>
-                Accesso negato
-              </div>
-              <?php
-            endif
-            ?>
-            <?php
-          endif
-          ?>
-
-
           <label class="input_label font-questrial" for="email_field">Email</label>
           <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
             <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
@@ -81,15 +74,10 @@ require_once '../public/php/DbControl.php';
           <input placeholder="Password" title="Inpit title" name="password-accesso" type="password"
             class="input_field font-questrial" id="password_field">
         </div>
-
-
-        <button title="Accedi al tuo account digitalforginiano !" type="submit"
+        <button title="Accedi al tuo account digitalforginiano !" type="button" id="btn-accedi-account"
           class="btn btn-warning fw-bold w-75 mx-auto font-questrial" name="btn-submit-accesso">
           <span>ACCEDI</span>
         </button>
-
-
-
         <div class="separator">
           <hr class="line">
           <span class="font-questrial">Oppure</span>
@@ -103,10 +91,11 @@ require_once '../public/php/DbControl.php';
     </div>
   </div>
   <!--<div class="col float-md-end mb-3 ms-md-3"></div>-->
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/script.js"></script>
+
 
 </html>

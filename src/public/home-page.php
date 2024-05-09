@@ -1,9 +1,10 @@
 <?php
 require_once '../public/php/DbControl.php';
-$db_control = DBControl::getDB("root","forge_db");
+$db_control = DBControl::getDB("root", "forge_db");
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +54,10 @@ $db_control = DBControl::getDB("root","forge_db");
                 account_circle
               </span>
             </div>
-            <h5 class="offcanvas-title font-questrial px-15 text-warning" id="offcanvasRightLabel"> Nome Cognome</h5>
+            <h5 class="offcanvas-title font-questrial px-15 text-warning" id="offcanvasRightLabel">
+              <?= $db_control->getDatiUser("nome") ?>
+              <?= $db_control->getDatiUser("cognome") ?>
+            </h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
               aria-label="close"></button>
           </div>
@@ -127,7 +131,10 @@ $db_control = DBControl::getDB("root","forge_db");
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end bg-dark">
               <li>
-                <h4 class="dropdown-header text-warning fs-5 font-questrial">Nome Cognome</h4>
+                <h4 class="dropdown-header text-warning fs-5 font-questrial">
+                  <?= $db_control->getDatiUser("nome") ?>
+                  <?= $db_control->getDatiUser("cognome") ?>
+                </h4>
               </li>
               <hr class="hr-menu">
               <li><a class="dropdown-item text-light font-questrial p-2 pointer" href="" data-bs-toggle="modal"
@@ -165,29 +172,29 @@ $db_control = DBControl::getDB("root","forge_db");
         </div>
         <div class="modal-body">
           <form class="row g-4 container mx-auto rounded text-dark font-questrial">
+            <div class="col-12">
+              <label for="inputEmail" class="form-label">Email</label>
+              <input title="Inpit title" class="input_field2 form-control font-questrial"
+                value="<?= $_SESSION['email_user'] ?>" disabled>
+            </div>
             <div class="col-xl-6">
               <label for="inputNome" class="form-label">Nome</label>
               <input title="Inpit title" name="nome-profilo" type="text"
-                class="input_field2 form-control font-questrial" id="inputNome" value="<?= $db_control->getDatiUser('nome'); ?>"
-                onchange="ViewSalvaModifiche()">
+                class="input_field2 form-control font-questrial" id="inputNome"
+                value="<?= $db_control->getDatiUser('nome') ?>" onchange="ViewSalvaModifiche()">
             </div>
             <div class="col-xl-6">
               <label for="inputCognome" class="form-label">Cognome</label>
               <input title="Inpit title" name="cognome-profilo" type="text"
-                class="input_field2 form-control font-questrial" id="inputCognome" value="<?= $db_control->getDatiUser('cognome'); ?>"
-                onchange="ViewSalvaModifiche()">
+                class="input_field2 form-control font-questrial" id="inputCognome"
+                value="<?= $db_control->getDatiUser('cognome') ?>" onchange="ViewSalvaModifiche()">
             </div>
-            <div class="col-12">
-              <label for="inputEmail" class="form-label">Email</label>
-              <input title="Inpit title" name="email-profilo" type="email"
-                class="input_field2 form-control font-questrial" id="inputEmail" value="<?= $_SESSION['email_user'] ?>"
-                onchange="ViewSalvaModifiche()">
-            </div>
+
             <div class="col-xl-6">
               <label for="password_field" class="form-label">Password</label>
               <input title="Inpit title" name="password-profilo" type="password"
                 class="input_field2 form-control font-questrial gap-3" id="password_field" onchange="CheckPass(true)"
-                value="<?= $db_control->getDatiUser('password'); ?>">
+                value="<?= $db_control->getDatiUser('password') ?>">
               <div class="pt-2 text-danger gap-1" id="invalidPassword1" style="display: none !important;">
                 <span class="material-symbols-outlined">
                   close
@@ -769,6 +776,17 @@ $db_control = DBControl::getDB("root","forge_db");
                           </div>
                         </div>
                       </div>
+                      <div class="toast-container position-fixed bottom-0 start-0 p-3 font-questrial">
+                        <div class="row">
+                          <div class="col-auto">
+                            <div class="toast toast-modifica-profilo p-1" role="alert" aria-live="assertive"
+                              aria-atomic="true">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       <!-- Modal -->
                       <div class="modal fade" id="modale-prodotto-1" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1068,8 +1086,8 @@ $db_control = DBControl::getDB("root","forge_db");
                       &copy; 2024. All Rights Reserved.
                     </div>
                     <div class="credits text-secondary text-center text-md-start mt-2 fs-7">
-                      Built by <a href="#" class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with <span
-                        class="text-warning">&#9829</span>
+                      Built by <a href="#" class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with
+                      <span class="text-warning">&#9829</span>
                     </div>
                   </div>
 

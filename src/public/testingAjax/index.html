@@ -11,43 +11,43 @@
 
 <body>
 
-<div class="container mt-5">
-    <div class="table-responsive">
-        <table class="table table-primary">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Cognome</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Cognome</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>    
 
 </body>
 <script>
-    fetch("/php/select.php",{
-        method : 'POST',
-        header : {
-            "Content-Type" : "application/json"
-        }
+
+    const formdata = new FormData();
+    formdata.append("nome","carducci")
+    formdata.append("cognome","asdasds")
+    formdata.append("email","ciao@test.it")
+    formdata.append("password","ascoiikoqw")
+
+
+    fetch("/php/salva-modifiche.php", {
+        method: 'POST',
+        header: {
+            "Content-Type": "application/json"
+        },
+        body: formdata
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("dati : ", data)
-        data.forEach(user => {
-            document.getElementById("tbody").innerHTML += `
-                <tr>
-                    <td>${user.nome}</td>
-                    <td>${user.cognome}</td>
-                    <td>${user.email}</td>
-                </tr>
-            ` ;
-        });;
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log("result ->  : ", data)
+        });
 </script>
 
 </html>

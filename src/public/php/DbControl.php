@@ -27,18 +27,27 @@ class DBControl{
         return (bool) $this->conn->query($sql);
     }
 
-    public function checkUser($email,$password):bool{
+    public function checkUser($email,$password):array{
 
-        $sql_check = "SELECT * 
-                    FROM utenti
-                    WHERE email_user = '{$email}' AND password = '{$password}';
-                    ";
-        
-        $result_num_rows =  $this->conn->query($sql_check)->num_rows;
+        $tab = [
+                'email_check'=> $this->getUserByEmail($email),
+                'pass_check' => $this->getUserByPassword($password)
+            ];
+         
+        return $tab;
+       
+    }
+    private function getUserByPassword($pass):bool{
+        $ris = $this->conn->query("SELECT * FROM utenti WHERE password = '$pass'");
+        if($ris->num_rows == 1){
+            return true;
+        }
+        return false;
+    }
+    private function getUserByEmail($email):bool{
 
-        if($result_num_rows == 1){
-            $_SESSION['email_user'] = $email;
-            echo "<script type='text/javascript'>location.href = 'home-page.php';</script><h1 class='text-light'>CIAO AMICO</h1>";
+        $ris = $this->conn->query("SELECT * FROM utenti WHERE email_user = '$email'");
+        if($ris->num_rows == 1){
             return true;
         }
         return false;
@@ -54,14 +63,14 @@ class DBControl{
         return $user_obj[$data];
     }
 
-    public function updateUserData($nome,$cognome ,$email,$password):bool{
+    public function updateUserData($nome,$cognome,$password):string{
+
         $sql_update = " UPDATE utenti
-                        SET email_user = '$email' , nome = '$nome' , cognome = '$cognome' , password = '$password'
+                        SET nome = '$nome',cognome = '$cognome',password = '$password'
+                        WHERE email_user = '{$_SESSION['email_user']}';
         ";
         $res = $this->conn->query($sql_update);
-        return (bool)$res;
+        return (string) $res;
     }
 
 }
-
-?>
