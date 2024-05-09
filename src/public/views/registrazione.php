@@ -107,11 +107,11 @@ require_once '../public/php/DbControl.php';
       <hr>
       <div class="col-12 d-flex justify-content-center gap-4">
         <button type="button" class="btn text-secondary" style="border: 1px solid #ffc1078b;"
-          onclick="ChangePage('index.php')">ANNULLA</button>
+          onclick="ChangePage('/')">ANNULLA</button>
         <button type="submit" name="btn-submit" class="btn btn-warning fw-bold" id="btn-crea-account-serial" disabled>CREA
           ACCOUNT</button>
       </div>
-      <p id="serialNote2" class="font-questrial">Hai già un account? <a href="login.php">accedi qui</a></p>
+      <p id="serialNote2" class="font-questrial">Hai già un account? <a href="login">accedi qui</a></p>
     </form>
   </div>
 </body>

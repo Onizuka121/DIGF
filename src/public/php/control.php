@@ -12,7 +12,7 @@ if(isset($_POST['email-accesso']) && isset($_POST['password-accesso'])){
     
     echo json_encode($arr_checking);
 
-    exit;
+    die();
 }
 
 

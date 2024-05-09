@@ -12,9 +12,12 @@ let id_divs_container = [
   "serialHelpContainer",
   "serialAddProductContainer",
 ];
-document
+try {
+  document
   .getElementById("btn-accedi-account")
   .addEventListener("click", CheckLogin);
+} catch (error) {}
+
 
 try {
   document
@@ -53,7 +56,7 @@ async function CheckLogin() {
         );
         $(".toast.toast-logged-output").toast("show");
       } else {
-        window.location = "home-page.php";
+        ChangePage("home-page");
       }
     });
 }
@@ -86,8 +89,6 @@ async function SalvaModifiche() {
     });
   DiscardAll();
 }
-
-//formatCreditCardNumber();
 
 let div_setted_id = "mkplaceID";
 
@@ -127,7 +128,6 @@ function ColorOrNotNavItem(id_div_nav_bar) {
   }
 }
 
-let pass;
 
 function DiscardAll() {
   document.getElementById("confermaPasswordSerial").style.display = "none";
@@ -156,7 +156,7 @@ function CheckPass(change = false) {
     document.getElementById("confermaPasswordSerial").style.display = "block";
     document.getElementById("SaveModificheSerial").style.display = "none";
   }
-  pass = document.getElementById("password_field").value + "";
+ let pass = document.getElementById("password_field").value;
   if (pass.length >= 10) {
     document.getElementById("validPassword1").style.display = "flex";
     document.getElementById("invalidPassword1").style.display = "none";
@@ -170,8 +170,10 @@ function CheckPass(change = false) {
 }
 
 function CheckConfPass() {
-  document.getElementById("SaveModificheSerial").style.display = "none";
-  if (pass == document.getElementById("password_field2").value) {
+  try {
+    document.getElementById("SaveModificheSerial").style.display = "none";
+  } catch (error) {}
+  if (document.getElementById("password_field").value == document.getElementById("password_field2").value) {
     document.getElementById("validPassword2").style.display = "flex";
     document.getElementById("invalidPassword2").style.display = "none";
     if (document.getElementById("btn-crea-account-serial") != null)
