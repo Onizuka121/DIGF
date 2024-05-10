@@ -1,13 +1,9 @@
 <?php
-
-
 $request = $_SERVER['REQUEST_URI'];
-
 switch ($request) {
     case '/test':
         require __DIR__ . '/php/test.php';
         break;
-
     case '/':
         require __DIR__ . '/views/home.html';
         break;

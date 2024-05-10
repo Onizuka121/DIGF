@@ -83,7 +83,7 @@ require_once '../public/php/DbControl.php';
           <hr class="line">
         </div>
         <p id="serialNote2" class="font-questrial">Non hai ancora un account?</p>
-        <button title="Registrati" type="button" class="sign-in_ggl" onclick="ChangePage('registrazione.php')">
+        <button title="Registrati" type="button" class="sign-in_ggl" onclick="ChangePage('/registrazione')">
           <span class="font-questrial">REGISTRATI</span>
         </button>
       </form>

@@ -14,10 +14,9 @@ let id_divs_container = [
 ];
 try {
   document
-  .getElementById("btn-accedi-account")
-  .addEventListener("click", CheckLogin);
+    .getElementById("btn-accedi-account")
+    .addEventListener("click", CheckLogin);
 } catch (error) {}
-
 
 try {
   document
@@ -26,39 +25,41 @@ try {
 } catch (error) {}
 
 async function CheckLogin() {
-  const formdata_accesso = new FormData();
-  formdata_accesso.append(
-    "email-accesso",
-    document.getElementById("email_field").value.trim()
-  );
-  formdata_accesso.append(
-    "password-accesso",
-    document.getElementById("password_field").value.trim()
-  );
-  fetch("../php/control.php", {
-    method: "POST",
-    header: {
-      "Content-Type": "application/json",
-    },
-    body: formdata_accesso,
-  })
-    .then((response) => response.json())
-    .then((out) => {
-      if (!out.email_check || !out.pass_check) {
-        let html_toast;
-        if (!out.email_check) {
-          html_toast = "Utente non registrato";
-        } else if (!out.pass_check && out.email_check) {
-          html_toast = "Password non coretta";
+  try {
+    const formdata_accesso = new FormData();
+    formdata_accesso.append(
+      "email-accesso",
+      document.getElementById("email_field").value.trim()
+    );
+    formdata_accesso.append(
+      "password-accesso",
+      document.getElementById("password_field").value.trim()
+    );
+    fetch("../php/control.php", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: formdata_accesso,
+    })
+      .then((response) => response.json())
+      .then((out) => {
+        if (!out.email_check || !out.pass_check) {
+          let html_toast;
+          if (!out.email_check) {
+            html_toast = "Utente non registrato";
+          } else if (!out.pass_check && out.email_check) {
+            html_toast = "Password non coretta";
+          }
+          $(".toast.toast-logged-output").html(
+            "<div class='toast-body'>" + html_toast + "</div>"
+          );
+          $(".toast.toast-logged-output").toast("show");
+        } else {
+          ChangePage("home-page");
         }
-        $(".toast.toast-logged-output").html(
-          "<div class='toast-body'>" + html_toast + "</div>"
-        );
-        $(".toast.toast-logged-output").toast("show");
-      } else {
-        ChangePage("home-page");
-      }
-    });
+      });
+  } catch (error) {}
 }
 
 async function SalvaModifiche() {
@@ -72,21 +73,23 @@ async function SalvaModifiche() {
     "password",
     document.getElementById("password_field").value.trim()
   );
+  try {
+    fetch("../php/control.php", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((out) => {
+        $(".toast.toast-modifica-profilo").html(
+          "<div class='toast-body'> <span class='material-symbols-outlined align-middle p-1'>person_check</span> Profilo aggiornato</div>"
+        );
+        $(".toast.toast-modifica-profilo").toast("show");
+      });
+  } catch (error) {}
 
-  fetch("../php/salva-modifiche.php", {
-    method: "POST",
-    header: {
-      "Content-Type": "application/json",
-    },
-    body: formdata,
-  })
-    .then((response) => response.json())
-    .then((out) => {
-      $(".toast.toast-modifica-profilo").html(
-        "<div class='toast-body'> <span class='material-symbols-outlined align-middle p-1'>person_check</span> Profilo aggiornato</div>"
-      );
-      $(".toast.toast-modifica-profilo").toast("show");
-    });
   DiscardAll();
 }
 
@@ -128,7 +131,6 @@ function ColorOrNotNavItem(id_div_nav_bar) {
   }
 }
 
-
 function DiscardAll() {
   document.getElementById("confermaPasswordSerial").style.display = "none";
   document.getElementById("invalidPassword2").style.display = "none";
@@ -156,7 +158,7 @@ function CheckPass(change = false) {
     document.getElementById("confermaPasswordSerial").style.display = "block";
     document.getElementById("SaveModificheSerial").style.display = "none";
   }
- let pass = document.getElementById("password_field").value;
+  let pass = document.getElementById("password_field").value;
   if (pass.length >= 10) {
     document.getElementById("validPassword1").style.display = "flex";
     document.getElementById("invalidPassword1").style.display = "none";
@@ -173,7 +175,10 @@ function CheckConfPass() {
   try {
     document.getElementById("SaveModificheSerial").style.display = "none";
   } catch (error) {}
-  if (document.getElementById("password_field").value == document.getElementById("password_field2").value) {
+  if (
+    document.getElementById("password_field").value ==
+    document.getElementById("password_field2").value
+  ) {
     document.getElementById("validPassword2").style.display = "flex";
     document.getElementById("invalidPassword2").style.display = "none";
     if (document.getElementById("btn-crea-account-serial") != null)
