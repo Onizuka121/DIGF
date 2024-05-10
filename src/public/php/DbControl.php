@@ -24,6 +24,8 @@ class DBControl{
     public function registraUtente($nome,$cognome,$email,$password):bool{
         $sql = "INSERT INTO utenti (nome,cognome,email_user,password)
                 VALUES ('{$nome}','{$cognome}','{$email}','{$password}')";
+
+           
         return (bool) $this->conn->query($sql);
     }
 
@@ -33,7 +35,9 @@ class DBControl{
                 'email_check'=> $this->getUserByEmail($email),
                 'pass_check' => $this->getUserByPassword($password)
             ];
-         
+        if($tab['email_check'] && $tab['pass_check']){
+            $_SESSION['email_user'] = $email;
+        }    
         return $tab;
        
     }
