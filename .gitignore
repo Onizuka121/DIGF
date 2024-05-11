@@ -1,5 +1,2 @@
-**/storage/mysql/
-# exclude everything except directory foo/bar
-!**/digitalforge_db
-
-
+docker/.docker/storage/mysql/**/mysql.sock
+docker/.docker/storage/mysql/#innodb_redo/*
