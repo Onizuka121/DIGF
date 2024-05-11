@@ -56,7 +56,7 @@ async function CheckLogin() {
           );
           $(".toast.toast-logged-output").toast("show");
         } else {
-          ChangePage("home-page");
+            ChangePage("home-page");
         }
       });
   } catch (error) {}

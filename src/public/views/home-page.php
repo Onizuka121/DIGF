@@ -71,22 +71,30 @@ $db_control = DBControl::getDB("root", "forge_db");
             </a>
             <br>
             <br>
-            <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" data-bs-dismiss="offcanvas"
-              onclick="HandleAndView('li-ai-ID','serialAiContainer')">
-              <span class="material-symbols-outlined text-warning align-middle">
-                robot_2
-              </span>
-              Assistente AI
-            </a>
-            <br>
-            <br>
-            <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" data-bs-dismiss="offcanvas"
-              onclick="HandleAndView('li-pre-ID','serialPreferitiContainer')">
-              <span class="material-symbols-outlined text-warning align-middle">
-                bookmark
-              </span>
-              Preferiti
-            </a>
+
+            <?php
+            if ($_SESSION['table'] == 'utenti'):
+              ?>
+              <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" data-bs-dismiss="offcanvas"
+                onclick="HandleAndView('li-ai-ID','serialAiContainer')">
+                <span class="material-symbols-outlined text-warning align-middle">
+                  robot_2
+                </span>
+                Assistente AI
+              </a>
+              <br>
+              <br>
+              <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" data-bs-dismiss="offcanvas"
+                onclick="HandleAndView('li-pre-ID','serialPreferitiContainer')">
+                <span class="material-symbols-outlined text-warning align-middle">
+                  bookmark
+                </span>
+                Preferiti
+              </a>
+              <?php
+            endif
+            ?>
+
             <br>
 
             <hr class=text-bg-light">
@@ -109,7 +117,7 @@ $db_control = DBControl::getDB("root", "forge_db");
             </a>
             <br>
             <br>
-            <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" href="index.html">
+            <a class="navbar-brand font-questrial fs-5 text-light align-middle g-3" href="/">
               <span class="material-symbols-outlined text-warning align-middle">
                 logout
               </span>
@@ -119,9 +127,16 @@ $db_control = DBControl::getDB("root", "forge_db");
           </div>
         </div>
         <div class="d-grid gap-2 d-md-block d-none shadow">
-          <button class="btn btn-warning fw-bold font-questrial" type="button" onclick="ChangePage('add-payment.html')">
+          <?php
+          if($_SESSION['table'] == "utenti"):
+          ?>
+          <button class="btn btn-warning fw-bold font-questrial" type="button" onclick="ChangePage('add-payment')">
             AGGIUNGI METODO DI PAGAMENTO
           </button>
+          <?php
+          endif
+          ?>
+          
           <div class="btn-group">
             <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
               data-bs-display="static" aria-expanded="false">
@@ -134,6 +149,8 @@ $db_control = DBControl::getDB("root", "forge_db");
                 <h4 class="dropdown-header text-warning fs-5 font-questrial">
                   <?= $db_control->getDatiUser("nome") ?>
                   <?= $db_control->getDatiUser("cognome") ?>
+                  
+
                 </h4>
               </li>
               <hr class="hr-menu">
@@ -143,7 +160,7 @@ $db_control = DBControl::getDB("root", "forge_db");
                     visibility
                   </span>
                   Visualizza profilo</a></li>
-              <li><a class="dropdown-item text-light font-questrial p-2" href="index.html">
+              <li><a class="dropdown-item text-light font-questrial p-2" href="/">
                   <span class="material-symbols-outlined text-warning align-middle">
                     logout
                   </span>
