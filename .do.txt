@@ -1,1 +1,15 @@
 - cambiare totalmente la pagina per home-page / solo una pagina aiutati con if e var Session 
+
+
+ <?php
+          if ($_SESSION['table'] == "utenti"):
+            ?>
+
+            <?php
+          endif
+          ?>
+
+
+           <?php
+            if ($_SESSION['table'] == "utenti_ads"):
+              ?>

@@ -39,18 +39,18 @@ class DBControl
         $tabelle = ['utenti' => 'email_user', 'utenti_ads' => 'email_ads'];
 
         foreach ($tabelle as $tabella => $nome_campo) {
-            
+
             $checking = [
-                'email_check' => $this->getUserByEmail($email,$tabella,$nome_campo),
-                'pass_check' => $this->getUserByPassword($password,$tabella)
+                'email_check' => $this->getUserByEmail($email, $tabella, $nome_campo),
+                'pass_check' => $this->getUserByPassword($password, $tabella)
             ];
 
             if ($checking['email_check'] && $checking['pass_check']) {
                 $_SESSION['email_user'] = $email;
                 $_SESSION['table'] = $tabella;
-                $_SESSION['campo'] = $nome_campo; 
+                $_SESSION['campo'] = $nome_campo;
                 break;
-            }elseif($checking['email_check'] || $checking['pass_check']){
+            } elseif ($checking['email_check'] || $checking['pass_check']) {
                 break;
             }
         }
@@ -59,7 +59,7 @@ class DBControl
 
     }
 
-    private function getUserByPassword($pass,$tab): bool
+    private function getUserByPassword($pass, $tab): bool
     {
         $ris = $this->conn->query("SELECT * FROM $tab WHERE password = '$pass'");
         if ($ris->num_rows == 1) {
@@ -67,7 +67,7 @@ class DBControl
         }
         return false;
     }
-    private function getUserByEmail($email,$tab,$camp): bool
+    private function getUserByEmail($email, $tab, $camp): bool
     {
         $ris = $this->conn->query("SELECT * FROM $tab WHERE $camp = '$email'");
         if ($ris->num_rows == 1) {
@@ -88,7 +88,8 @@ class DBControl
         return $user_obj[$data];
     }
 
-    public function test(){
+    public function test()
+    {
         $sql_select = "SELECT * 
                     FROM  {$_SESSION['table']}
                     WHERE {$_SESSION['campo']} = '{$_SESSION['email_user']}';
@@ -96,7 +97,7 @@ class DBControl
         $user_obj = $this->conn->query($sql_select);
 
 
-        return var_dump($user_obj,$_SESSION['table'],$_SESSION['campo'], $_SESSION['email_user']);
+        return var_dump($user_obj, $_SESSION['table'], $_SESSION['campo'], $_SESSION['email_user']);
     }
 
     public function updateUserData($nome, $cognome, $password): string
@@ -110,4 +111,19 @@ class DBControl
         return (string) $res;
     }
 
+
+    public function addProduct($ap): bool
+    {
+        $sql = "INSERT INTO prodotti (nominativo,prezzo,descrizione,link_sito_app,link_img1,link_img2,link_img3,email_ads_add)
+                VALUES ('{$ap['nominativo']}',
+                {$ap['prezzo']},
+                '{$ap['descrizione']}',
+                '{$ap['link-dettagli']}',
+                '{$ap['url-img-1']}',
+                '{$ap['url-img-2']}',
+                '{$ap['url-img-3']}',
+                '{$_SESSION['email_user']}')
+        ";
+        return $this->conn->query($sql);
+    }
 }
