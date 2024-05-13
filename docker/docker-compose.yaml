@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  app:
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      container_name: digitalforge-app
+      restart: always 
+      working_dir: /var/www/
+      volumes:
+        - ../src:/var/www
+
+  nginx:
+    image: nginx:latest
+    container_name: digitalforge-nginx
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+
+  db:
+      image: mysql:8.0
+      container_name: digitalforge-db
+      volumes:
+        - .docker/storage/mysql:/var/lib/mysql
+      ports:
+        - "3306:3306"
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: forge_db
+
+        
