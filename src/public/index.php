@@ -20,7 +20,7 @@ switch ($request) {
         require __DIR__ . '/views/add-payment.php';
         break;
     case '/home-page-ads':
-        require __DIR__ . '/views/add-payment.php';
+        require __DIR__ . '/views/home-page-ads.php';
         break;
     default:
         require __DIR__ . '/views/404.html';

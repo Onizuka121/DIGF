@@ -6,3 +6,8 @@
 ./binlog.000006
 ./binlog.000007
 ./binlog.000008
+<<<<<<< HEAD
+=======
+./binlog.000009
+./binlog.000010
+>>>>>>> dfb00707b862d79116eca7b6ad98efa308b5a09a

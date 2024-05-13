@@ -277,18 +277,89 @@ $(document).ready(function () {
 });
 
 function ShowImageInDiv(name_input, mod = false, number_id = null) {
-  var url_image = document.getElementsByName("url-img-" + name_input)[0].value;
+  try {
+    var url_image = document.getElementsByName("url-img-" + name_input)[0]
+      .value;
 
-  var html =
-    " <img src='" +
-    url_image +
-    "' class='card-img-top w-75 mx-auto' alt='...'>";
+    var html =
+      " <img src='" +
+      url_image +
+      "' class='card-img-top w-75 mx-auto' alt='...'>";
 
-  var id_div_img = "container-image-" + name_input;
+    var id_div_img = "container-image-" + name_input;
 
-  document.getElementById(id_div_img).innerHTML = html;
+    document.getElementById(id_div_img).innerHTML = html;
 
-  if (mod) {
-    ViewSalvaModifiche(number_id);
+    if (mod) {
+      ViewSalvaModifiche(number_id);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//----------------
+
+try {
+  document
+    .getElementById("btn-add-product")
+    .addEventListener("click", AddProduct);
+} catch (error) {}
+
+async function AddProduct() {
+  try {
+    const formdata_product = new FormData();
+    formdata_product.append(
+      "url-img-1",
+      document.getElementById("url-img-1").value.trim()
+    );
+    formdata_product.append(
+      "url-img-2",
+      document.getElementById("url-img-2").value.trim()
+    );
+    formdata_product.append(
+      "url-img-3",
+      document.getElementById("url-img-3").value.trim()
+    );
+    formdata_product.append(
+      "nominativo",
+      document.getElementById("nominativo").value.trim()
+    );
+    formdata_product.append(
+      "link-dettagli",
+      document.getElementById("link-dettagli").value.trim()
+    );
+    formdata_product.append(
+      "produttore",
+      document.getElementById("produttore").value
+    );
+    formdata_product.append(
+      "categoria",
+      document.getElementById("selectCategoriaComputer-add").value
+    );
+    formdata_product.append(
+      "prezzo",
+      document.getElementById("prezzo").value.trim()
+    );
+    formdata_product.append(
+      "descrizione",
+      document.getElementById("floatingTextarea2").value.trim()
+    );
+
+    fetch("../php/control.php", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: formdata_product,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+       
+          console.log(result);
+        
+      });
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -1,4 +1,1 @@
-docker/.docker/storage/#innodb_redo
-docker/.docker/storage/#innodb_temp
-docker/.docker/storage/mysql
-docker/.docker/storage/sys
+docker/.docker/storage/mysql/mysql.sock
