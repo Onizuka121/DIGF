@@ -1,1 +1,2 @@
-docker/.docker/storage/mysql/mysql.sock
+docker/.docker/storage/
+docker/.docker/storage/mysql/ibtmp1
