@@ -1,2 +1,2 @@
-docker/.docker/storage/mysql/**/mysql.sock
-docker/.docker/storage/mysql/#innodb_redo/*
+mysql
+
