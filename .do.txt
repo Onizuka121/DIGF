@@ -1,5 +1,6 @@
 - cambiare totalmente la pagina per home-page / solo una pagina aiutati con if e var Session 
-
+- alterare tabella prodotti ( add coloumn categoria , produttore )
+- continua nello sviluppo della parte aggiungi prodotto
 
  <?php
           if ($_SESSION['table'] == "utenti"):
