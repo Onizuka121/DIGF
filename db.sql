@@ -37,6 +37,7 @@ CREATE TABLE `prodotti` (
   `email_ads_add` varchar(50) NOT NULL,
   `produttore` varchar(50) NOT NULL,
   `categoria` varchar(50) NOT NULL,
+  `data_ora_inserimento` datetime NOT NULL DEFAULT now(),
   PRIMARY KEY (`id_prodotto`),
   KEY `email_ads_add` (`email_ads_add`),
   CONSTRAINT `prodotti_ibfk_1` FOREIGN KEY (`email_ads_add`) REFERENCES `utenti_ads` (`email_ads`) ON DELETE CASCADE ON UPDATE CASCADE
