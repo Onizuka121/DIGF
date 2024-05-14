@@ -114,7 +114,7 @@ class DBControl
 
     public function addProduct($ap): bool
     {
-        $sql = "INSERT INTO prodotti (nominativo,prezzo,descrizione,link_sito_app,link_img1,link_img2,link_img3,email_ads_add)
+        $sql = "INSERT INTO prodotti (nominativo,prezzo,descrizione,link_sito_app,link_img1,link_img2,link_img3,email_ads_add,produttore,categoria)
                 VALUES ('{$ap['nominativo']}',
                 {$ap['prezzo']},
                 '{$ap['descrizione']}',
@@ -122,7 +122,9 @@ class DBControl
                 '{$ap['url-img-1']}',
                 '{$ap['url-img-2']}',
                 '{$ap['url-img-3']}',
-                '{$_SESSION['email_user']}')
+                '{$_SESSION['email_user']}',
+                '{$ap['produttore']}',
+                '{$ap['categoria']}')
         ";
         return $this->conn->query($sql);
     }

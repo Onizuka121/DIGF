@@ -38,10 +38,10 @@ $db_control = DBControl::getDB("root", "forge_db");
           src="https://zammad.com/media/pages/product/features/gitlab-integration/693fc93d4d-1698589015/gitlab_integration.png"
           alt="Logo" width="40" height="40" class="d-inline-block align-text-top"">
         DIGITALFORGE
-      </a>
+      </a> 
       <button class=" btn btn-trasparent text-light d-xl-none d-md-none" id="s6003" type="button"
-          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-        <span class="material-symbols-outlined text-warning fs-1 align-middle">
+          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" onload="testload()">
+        <span class="material-symbols-outlined text-warning fs-1 align-middle" onload="testload()">
           menu
         </span>
         </button>

@@ -278,8 +278,7 @@ $(document).ready(function () {
 
 function ShowImageInDiv(name_input, mod = false, number_id = null) {
   try {
-    var url_image = document.getElementsByName("url-img-" + name_input)[0]
-      .value;
+    var url_image = document.getElementById("url-img-" + name_input).value;
 
     var html =
       " <img src='" +
@@ -362,4 +361,7 @@ async function AddProduct() {
   } catch (error) {
     console.log(error);
   }
+}
+function testload(){
+  console.log("caricato elemento");
 }

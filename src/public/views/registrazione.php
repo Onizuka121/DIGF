@@ -48,7 +48,7 @@ require_once '../public/php/DbControl.php';
     <?php
       endif
     ?>
-    <form class="row g-4 container mx-auto rounded p-3 text-light font-questrial" action='<?= $_SERVER['PHP_SELF'] ?>'
+    <form class="row g-4 container mx-auto rounded p-3 text-light font-questrial" action='registrazione'
       method="POST">
       <div class="title_container">
         <p class="title">Crea il tuo account</p>
