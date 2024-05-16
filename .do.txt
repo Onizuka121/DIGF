@@ -1,16 +1,6 @@
 - cambiare totalmente la pagina per home-page / solo una pagina aiutati con if e var Session 
 - alterare tabella prodotti ( add coloumn categoria , produttore )
 - continua nello sviluppo della parte aggiungi prodotto
+  - sistema la parte di stampa del prodotto aggiunto 
+  - modifica la lunghezza dei campi link dei prodotti
 
- <?php
-          if ($_SESSION['table'] == "utenti"):
-            ?>
-
-            <?php
-          endif
-          ?>
-
-
-           <?php
-            if ($_SESSION['table'] == "utenti_ads"):
-              ?>

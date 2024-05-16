@@ -112,7 +112,7 @@ class DBControl
     }
 
 
-    public function addProduct($ap): bool
+    public function addProduct($ap): int
     {
         $sql = "INSERT INTO prodotti (nominativo,prezzo,descrizione,link_sito_app,link_img1,link_img2,link_img3,email_ads_add,produttore,categoria)
                 VALUES ('{$ap['nominativo']}',
@@ -124,8 +124,13 @@ class DBControl
                 '{$ap['url-img-3']}',
                 '{$_SESSION['email_user']}',
                 '{$ap['produttore']}',
-                '{$ap['categoria']}')
+                '{$ap['categoria']}');
         ";
-        return $this->conn->query($sql);
+        $id_product = -1;
+        if ($this->conn->query($sql)) {
+            $res = $this->conn->query("SELECT id_prodotto FROM prodotti ORDER BY data_ora_inserimento DESC;");
+            $id_product = (int)$res->fetch_assoc()['id_prodotto'];
+        }
+        return $id_product;
     }
 }

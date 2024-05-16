@@ -30,7 +30,10 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['password'
 
 if (isset($_POST['nominativo']) && isset($_POST['produttore'])) {
 
-  $out = ['result' => $db_control->addProduct($_POST)];
+  $out = ['id_product' => $db_control->addProduct($_POST)];
+  if($out['id_product']){
+    $out['date_time'] = time();
+  }
   echo json_encode($out);
 
   die();

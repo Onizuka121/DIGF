@@ -292,9 +292,7 @@ function ShowImageInDiv(name_input, mod = false, number_id = null) {
     if (mod) {
       ViewSalvaModifiche(number_id);
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 //----------------
@@ -334,7 +332,7 @@ async function AddProduct() {
     );
     formdata_product.append(
       "categoria",
-      document.getElementById("selectCategoriaComputer-add").value
+      document.getElementById("selectCategoriaComputer-add").value.toUpperCase()
     );
     formdata_product.append(
       "prezzo",
@@ -353,15 +351,194 @@ async function AddProduct() {
       body: formdata_product,
     })
       .then((response) => response.json())
-      .then((result) => {
-       
-          console.log(result);
-        
+      .then((out) => {
+        console.log(out);
+
+        if (out.id_product >= 0) {
+          
+          document
+            .getElementById("containerSerialAddedProducts")
+            .appendChild(formatCardAdded(formdata_product,out.id_product));
+          
+        }
       });
   } catch (error) {
     console.log(error);
   }
 }
-function testload(){
-  console.log("caricato elemento");
+
+function formatCardAdded(formData , timestamp = 0, id_product) {
+  let child_card_product = document.createElement("div");
+  let w_aggiunto = "ADESSO";
+  if(timestamp != 0){
+    
+  }
+  child_card_product.innerHTML = `<div class="card mb-3">
+  <span
+    class="position-absolute top-0 font-questrial fw-bold fs-6 start-50 translate-middle badge text-dark rounded-pill bg-warning">
+    AGGIUNTO ${w_aggiunto}
+  </span>
+  <div class="row g-0">
+    <div class="col-md-4 d-flex justify-content-center">
+      <img src="${formData.get("url-img-1")}"
+        class="img-fluid mx-auto img-preferiti" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get("categoria")}</small>
+        </h6>
+        <h5 class="card-title fw-bold fs-4 text-center font-questrial">${formData.get("nominativo")}</h5>
+        <h6 class="font-questrial fw-bold text-warning-secondary text-center fs-5">
+          $${formData.get("prezzo")}</h6>
+        <hr>
+        <div class="container-fluid d-flex justify-content-center gap-5">
+          <button type="button" class="btn btn-hover-dark-secondary rounded-5 p-3"
+            data-bs-toggle="modal" data-bs-target="#modale-aggiunto-${id_product}">
+            <span class="material-symbols-outlined align-middle">
+              visibility
+            </span>
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="modale-aggiunto-${id_product}" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5 font-questrial fw-bold" id="staticBackdropLabel">${formData.get("nominativo")}
+                  <span class="badge text-bg-warning text-dark fs-5">AGGIUNTO ${w_aggiunto}</span>
+                  </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div id="carouselExampleDark-${id_product}" class="carousel carousel-dark slide">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="1000">
+                        <img src="${formData.get("url-img-1")}"
+                          class="d-block img-carousel" alt="...">
+                      </div>
+                      <div class="carousel-item" data-bs-interval="1000">
+                        <img src="${formData.get("url-img-2")}"
+                          class="d-block img-carousel" alt="...">
+
+                      </div>
+                      <div class="carousel-item">
+                        <img src="${formData.get("url-img-3")}"
+                          class="d-block img-carousel" alt="...">
+                      </div>
+                    </div>
+                    <br>
+                    <button class="carousel-control-prev" type="button"
+                      data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                      data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get("categoria")}</small>
+                    </h6>
+                    <h5 class="card-title fw-bold fs-4 text-center font-questrial">
+                    ${formData.get("nominativo")}</h5>
+                    <h6 class="font-questrial fw-bold text-warning-secondary text-center fs-5">
+                      $${formData.get("prezzo")}</h6>
+
+                    <hr>
+                    <p class="fw-bold fs-5 font-questrial text-center">
+                      Descrizione</p>
+
+
+
+                    <ul class="list-group font-questrial shadow">
+                      <li class="list-group-item">${formData.get("descrizione")}</li>
+                      <li class="list-group-item">GPU 8‑core e Neural
+                        Engine 16‑core</li>
+                      <li class="list-group-item">8GB di memoria unificata
+                      </li>
+                      <li class="list-group-item">Unità SSD da 256GB</li>
+                      <li class="list-group-item">Display Liquid Retina da
+                        13,6" con True Tone²</li>
+                      <li class="list-group-item">Videocamera FaceTime HD
+                        a 1080p</li>
+                      <li class="list-group-item">Porta MagSafe 3 per la
+                        ricarica</li>
+                      <li class="list-group-item">Due porte Thunderbolt -
+                        USB 4</li>
+                    </ul>
+
+                  </div>
+                  <nav class="navbar">
+                    <div class="container-fluid d-flex w-100 p-1">
+                      <a class="navbar-brand img-logo-source p-2 rounded"
+                        href="${formData.get("link-dettagli")}">
+                        <img
+                          src="https://w7.pngwing.com/pngs/121/286/png-transparent-apple-logo-computer-icons-apple-logo-company-heart-logo-thumbnail.png"
+                          alt="Logo" width="20" height="20"
+                          class="d-inline-block align-text-center rounded mb-1">
+                          ${formData.get("produttore")}
+                      </a>
+                      <button type="button" class="btn img-logo-source font-questrial">
+                        <i class="fa fa-link" aria-hidden="true"></i>
+                        Più dettagli
+                      </button>
+                    </div>
+                  </nav>
+                </div>
+                <div class="modal-footer w-100">
+                  <button type="button" class="btn btn-warning font-questrial fw-bold d-flex gap-1"
+                    data-bs-toggle="modal" data-bs-target="#modificamodal">
+                    <span class="material-symbols-outlined">
+                      edit_note
+                    </span>
+                    MODIFICA</button>
+                  <button type="button" class="btn btn-hover-dark-secondary" data-bs-toggle="modal"
+                    data-bs-target="#cancelproductmodal2">
+                    <span class="material-symbols-outlined align-middle">
+                      cancel
+                    </span>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade font-questrial" id="cancelproductmodal2" tabindex="1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Conferma rimozione
+                  </h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Conferma di voler rimuovere questo prodotto dal market-place
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">ANULLA</button>
+                  <button type="button" class="btn btn-warning" data-bs-dismiss="modal">RIMUOVI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div></div>`;
+  return child_card_product;
 }
