@@ -352,14 +352,10 @@ async function AddProduct() {
     })
       .then((response) => response.json())
       .then((out) => {
-        console.log(out);
-
         if (out.id_product >= 0) {
-          
           document
             .getElementById("containerSerialAddedProducts")
-            .appendChild(formatCardAdded(formdata_product,out.id_product));
-          
+            .appendChild(formatCard(formdata_product,0,out.id_product));
         }
       });
   } catch (error) {
@@ -367,12 +363,26 @@ async function AddProduct() {
   }
 }
 
-function formatCardAdded(formData , timestamp = 0, id_product) {
+function formatCard(formData, timestamp = 0, id_product,market = false) {
   let child_card_product = document.createElement("div");
+  let prezzo = parseFloat(formData.get("prezzo")).toFixed(2);
   let w_aggiunto = "ADESSO";
-  if(timestamp != 0){
-    
+  if (timestamp != 0) {
+    let now = Date.now();
+    let calc = now - timestamp;
+    w_aggiunto = `${Math.round(calc / 3600000)} ORE FA'`;
   }
+
+  function getDescrizioneFormatted(descrizione) {
+    let out = "";
+    let splitted = formData.get("descrizione").split("#");
+    splitted.forEach((des) => {
+      out += `<li class="list-group-item">${des}</li>`;
+    });
+
+    return out;
+  }
+
   child_card_product.innerHTML = `<div class="card mb-3">
   <span
     class="position-absolute top-0 font-questrial fw-bold fs-6 start-50 translate-middle badge text-dark rounded-pill bg-warning">
@@ -385,11 +395,15 @@ function formatCardAdded(formData , timestamp = 0, id_product) {
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get("categoria")}</small>
+        <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get(
+          "categoria"
+        )}</small>
         </h6>
-        <h5 class="card-title fw-bold fs-4 text-center font-questrial">${formData.get("nominativo")}</h5>
+        <h5 class="card-title fw-bold fs-4 text-center font-questrial">${formData.get(
+          "nominativo"
+        )}</h5>
         <h6 class="font-questrial fw-bold text-warning-secondary text-center fs-5">
-          $${formData.get("prezzo")}</h6>
+          $${prezzo}</h6>
         <hr>
         <div class="container-fluid d-flex justify-content-center gap-5">
           <button type="button" class="btn btn-hover-dark-secondary rounded-5 p-3"
@@ -405,7 +419,9 @@ function formatCardAdded(formData , timestamp = 0, id_product) {
             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5 font-questrial fw-bold" id="staticBackdropLabel">${formData.get("nominativo")}
+                  <h1 class="modal-title fs-5 font-questrial fw-bold" id="staticBackdropLabel">${formData.get(
+                    "nominativo"
+                  )}
                   <span class="badge text-bg-warning text-dark fs-5">AGGIUNTO ${w_aggiunto}</span>
                   </h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -447,7 +463,9 @@ function formatCardAdded(formData , timestamp = 0, id_product) {
                     </button>
                   </div>
                   <div class="card-body">
-                    <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get("categoria")}</small>
+                    <h6 class="text-center"><small class="text-body-secondary font-questrial">${formData.get(
+                      "categoria"
+                    )}</small>
                     </h6>
                     <h5 class="card-title fw-bold fs-4 text-center font-questrial">
                     ${formData.get("nominativo")}</h5>
@@ -457,33 +475,16 @@ function formatCardAdded(formData , timestamp = 0, id_product) {
                     <hr>
                     <p class="fw-bold fs-5 font-questrial text-center">
                       Descrizione</p>
-
-
-
                     <ul class="list-group font-questrial shadow">
-                      <li class="list-group-item">${formData.get("descrizione")}</li>
-                      <li class="list-group-item">GPU 8‑core e Neural
-                        Engine 16‑core</li>
-                      <li class="list-group-item">8GB di memoria unificata
-                      </li>
-                      <li class="list-group-item">Unità SSD da 256GB</li>
-                      <li class="list-group-item">Display Liquid Retina da
-                        13,6" con True Tone²</li>
-                      <li class="list-group-item">Videocamera FaceTime HD
-                        a 1080p</li>
-                      <li class="list-group-item">Porta MagSafe 3 per la
-                        ricarica</li>
-                      <li class="list-group-item">Due porte Thunderbolt -
-                        USB 4</li>
+                    ${getDescrizioneFormatted(formData.get("descrizione"))}
                     </ul>
-
                   </div>
                   <nav class="navbar">
                     <div class="container-fluid d-flex w-100 p-1">
                       <a class="navbar-brand img-logo-source p-2 rounded"
                         href="${formData.get("link-dettagli")}">
                         <img
-                          src="https://w7.pngwing.com/pngs/121/286/png-transparent-apple-logo-computer-icons-apple-logo-company-heart-logo-thumbnail.png"
+                          src="${getIconBrand(formData.get("produttore"))}"
                           alt="Logo" width="20" height="20"
                           class="d-inline-block align-text-center rounded mb-1">
                           ${formData.get("produttore")}
@@ -541,4 +542,28 @@ function formatCardAdded(formData , timestamp = 0, id_product) {
     </div>
   </div></div>`;
   return child_card_product;
+}
+
+
+async function getIconBrand(name_brand) {
+
+  let url_icon = ""
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Referer: ''
+    }
+  };
+  
+  fetch('https://api.brandfetch.io/v2/search/'+name_brand, options)
+    .then(response => response.json())
+    .then(response => {
+      url_icon = response[0].icon
+      console.log(url_icon,response[0].icon)
+      return url_icon
+    })
+    .catch(err => console.error(err));
+  
 }

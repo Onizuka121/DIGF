@@ -2,5 +2,4 @@
 - alterare tabella prodotti ( add coloumn categoria , produttore )
 - continua nello sviluppo della parte aggiungi prodotto
   - sistema la parte di stampa del prodotto aggiunto 
-  - modifica la lunghezza dei campi link dei prodotti
 
