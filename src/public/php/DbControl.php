@@ -6,7 +6,7 @@ session_start();
 class DBControl
 {
 
-    private const URL_DB = "db";
+    private const URL_DB = "18.212.141.235";
     private const DB_NAME = "digitalforge_db";
     private ?mysqli $conn = null;
     private static ?DBControl $db_control_singelton = null;

@@ -1,6 +1,13 @@
-<?php
-require_once __DIR__."/DbControl.php";
-$db_control = DBControl::getDB("root","forge_db");
-$myfile = fopen(__DIR__."/.sql-db/db.sql", "r") or die("Unable to open file!");
+<?php 
+require "vendor/autoload.php";
+use \GeminiAPI\Client;
+use \GeminiAPI\Resources\Parts\TextPart;
 
-echo fread($myfile,filesize(__DIR__."/.sql-db/db.sql"));        
+$client = new Client('AIzaSyAqRQNjkwPj2aK_u7xtspMYGirgiRHXh7s');
+$response = $client->geminiPro()->generateContent(
+    new TextPart('PHP in less than 100 chars'),
+);
+
+print $response->text();
+// PHP: A server-side scripting language used to create dynamic web applications.
+// Easy to learn, widely used, and open-source.
