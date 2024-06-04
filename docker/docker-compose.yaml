@@ -19,6 +19,7 @@ services:
     volumes:
       - ../src:/var/www
       - ./nginx:/etc/nginx/conf.d
+    working_dir: /var/www 
 
   db:
       image: mysql:8.0
@@ -30,5 +31,5 @@ services:
       restart: always
       environment:
         MYSQL_ROOT_PASSWORD: forge_db
-
+  
         

@@ -30,7 +30,7 @@ require_once '../public/php/DbControl.php';
 <body class="body-home-page" id="serialBodyLogin">
   <div class="container d-flex mt-5 ps-0 shadow-lg p-0 rounded bg-transparent"
     style="height: 630px; backdrop-filter: blur(30px) !important;">
-    <img src="./img/img.png" class="d-sm-none d-none d-md-none d-xxl-block" style="width: 60%;" alt="...">
+    <img src="./img/img.png" class="d-sm-none d-none d-md-none d-xxl-block" style="width: 60%;" alt="..." id="image-login">
     <div class="col">
       <form class="form_container object-fit-contain">
         <div class="toast-container position-fixed top-10 start-70 p-3 font-questrial">

@@ -5,8 +5,9 @@ session_start();
 
 class DBControl
 {
+    // private const URL_DB = "18.212.141.235";
+    private const URL_DB = "db";
 
-    private const URL_DB = "18.212.141.235";
     private const DB_NAME = "digitalforge_db";
     private ?mysqli $conn = null;
     private static ?DBControl $db_control_singelton = null;
@@ -56,7 +57,6 @@ class DBControl
         }
 
         return $checking;
-
     }
 
     private function getUserByPassword($pass, $tab): bool
@@ -114,10 +114,10 @@ class DBControl
 
     public function addProduct($ap): int
     {
+
+        $descrizione = $this->conn->real_escape_string($ap['descrizione']);
         $sql = "INSERT INTO prodotti (nominativo,prezzo,descrizione,link_sito_app,link_img1,link_img2,link_img3,email_ads_add,produttore,categoria)
-                VALUES ('{$ap['nominativo']}',
-                {$ap['prezzo']},
-                '{$ap['descrizione']}',
+                VALUES ('{$ap['nominativo']}',{$ap['prezzo']},'{$descrizione}',
                 '{$ap['link-dettagli']}',
                 '{$ap['url-img-1']}',
                 '{$ap['url-img-2']}',
@@ -129,8 +129,58 @@ class DBControl
         $id_product = -1;
         if ($this->conn->query($sql)) {
             $res = $this->conn->query("SELECT id_prodotto FROM prodotti ORDER BY data_ora_inserimento DESC;");
-            $id_product = (int)$res->fetch_assoc()['id_prodotto'];
+            $id_product = (int) $res->fetch_assoc()['id_prodotto'];
         }
         return $id_product;
+    }
+
+    public function getAllProduct(): array
+    {
+        $result = $this->conn->query("SELECT * FROM prodotti");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNomeCognomeAdsByProduct($id_product): string
+    {
+
+        $sql = "SELECT nome,cognome 
+                FROM utenti_ads
+                INNER JOIN prodotti
+                ON utenti_ads.email_ads = prodotti.email_ads_add
+                WHERE prodotti.id_prodotto = {$id_product}";
+        $result = $this->conn->query($sql)->fetch_assoc();
+        return $result['nome'] . " " . $result['cognome'];
+    }
+    public function getProductAddedByAds(): array
+    {
+        $sql = "SELECT * 
+                FROM prodotti
+                WHERE prodotti.email_ads_add = '{$_SESSION['email_user']}'";
+
+        $result = $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
+
+    public function getNominativoAjax($term): array
+    {
+        $res = [];
+        $query = "SELECT nominativo FROM prodotti WHERE nominativo LIKE '%{$term}%' LIMIT 5";
+        $result = $this->conn->query($query);
+        if (mysqli_num_rows($result) > 0) {
+            while ($user = mysqli_fetch_array($result)) {
+                $res[] = $user['nominativo'];
+            }
+        } else {
+            $res = array();
+        }
+        return $res;
+    }
+
+    public function getProductByTerm($term): array
+    {
+        $sql = "SELECT * FROM prodotti WHERE nominativo LIKE '%{$term}%' LIMIT 15";
+        $result = $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);;
+
+        return $result;
     }
 }

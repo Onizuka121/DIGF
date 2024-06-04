@@ -3,3 +3,10 @@
 - continua nello sviluppo della parte aggiungi prodotto
   - sistema la parte di stampa del prodotto aggiunto 
 
+
+
+text-result-search
+
+marketPlaceSerial
+
+  

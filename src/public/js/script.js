@@ -1,3 +1,7 @@
+document
+  .getElementById("search-product-mk")
+  .addEventListener("click", searchProducts);
+
 let id_divs_nav_bar = [
   "li-mk-ID",
   "li-ai-ID",
@@ -12,17 +16,106 @@ let id_divs_container = [
   "serialHelpContainer",
   "serialAddProductContainer",
 ];
+
+let visible_bar = true;
+
+getProducts("allmk=true&allpro=false");
+if (document.getElementById("container-added-products") != null) {
+  getAllProductAdded();
+}
+
+try {
+  document.getElementById("hide-bar").addEventListener("click", function () {
+    let width = "70px";
+    let width2 = "125%";
+    let display_text_bar = "none";
+    let innerText_span = "chevron_right";
+    if (!visible_bar) {
+      width = "17%";
+      display_text_bar = "inline";
+      innerText_span = "chevron_left";
+      visible_bar = true;
+    } else {
+      visible_bar = false;
+    }
+    console.log(visible_bar);
+    document.getElementById("bar-main").style.width = width;
+    document.getElementById("bar-child").style.width = width2;
+    let elements = document.getElementsByClassName("text-bar");
+    console.log(typeof elements);
+    Array.from(elements).forEach((element) => {
+      element.style.display = display_text_bar;
+    });
+    document.getElementById("hide-bar").innerText = innerText_span;
+  });
+} catch (error) {
+  console.log(error);
+}
+
 try {
   document
     .getElementById("btn-accedi-account")
     .addEventListener("click", CheckLogin);
 } catch (error) {}
-
 try {
   document
     .getElementById("salva-modifiche-btn")
     .addEventListener("click", SalvaModifiche);
 } catch (error) {}
+
+async function GetDataFromAi() {
+  console.log("mandata hemini");
+  try {
+    const formdata_accesso = new FormData();
+
+    formdata_accesso.append(
+      "selectCategoriaComputer2",
+      document.getElementById("selectCategoriaComputer2").value.trim()
+    );
+    formdata_accesso.append(
+      "tipologia-pc",
+      document.getElementById("tipologia-pc").value.trim()
+    );
+    formdata_accesso.append(
+      "produttore",
+      document.getElementById("produttore").value.trim()
+    );
+    formdata_accesso.append(
+      "budget-min-pc",
+      document.getElementById("budget-min-pc").value.trim()
+    );
+    formdata_accesso.append(
+      "budget-max-pc",
+      document.getElementById("budget-max-pc").value.trim()
+    );
+    formdata_accesso.append(
+      "memoria-ram",
+      document.getElementById("memoria-ram").value.trim()
+    );
+    formdata_accesso.append(
+      "memoria-rom",
+      document.getElementById("memoria-rom").value.trim()
+    );
+    formdata_accesso.append(
+      "altre-specifiche",
+      document.getElementById("altre-specifiche").value.trim()
+    );
+
+    fetch("../php/get-data-gemini.php", {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: formdata_accesso,
+    })
+      .then((response) => response.json())
+      .then((out) => {
+        console.log(out);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function CheckLogin() {
   try {
@@ -59,7 +152,9 @@ async function CheckLogin() {
           ChangePage("home-page");
         }
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function SalvaModifiche() {
@@ -115,6 +210,7 @@ function HandleAndView(
     }
   });
   document.getElementById(div_container_to_view).style.display = "block";
+  document.getElementById(div_nav_to_color + "-bar").style.display = "block";
 }
 
 function ColorOrNotNavItem(id_div_nav_bar) {
@@ -123,6 +219,7 @@ function ColorOrNotNavItem(id_div_nav_bar) {
       if (document.getElementById(element) != null) {
         document.getElementById(element).style.cssText =
           ".nav-item:hover{ background-color: #21252937; cursor: pointer; }";
+        document.getElementById(element + "-bar").style.display = "none";
       }
     }
   });
@@ -259,23 +356,6 @@ function CancellaPreferito(id_card_preferito) {
   document.getElementById(id_card_preferito).style.display = "none";
 }
 
-$(document).ready(function () {
-  $(".toast").toast();
-  $(".bookmark-btn").click(function () {
-    if ($(this).hasClass("clicked")) {
-      $(".toast.toast-aggiunto").html(
-        "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_remove</span>Prodotto rimosso tra i preferiti </div>"
-      );
-    } else {
-      $(".toast.toast-aggiunto").html(
-        "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_added</span>Prodotto aggiunto tra i preferiti </div>"
-      );
-    }
-    $(".toast.toast-aggiunto").toast("show");
-    $(this).toggleClass("clicked");
-  });
-});
-
 function ShowImageInDiv(name_input, mod = false, number_id = null) {
   try {
     var url_image = document.getElementById("url-img-" + name_input).value;
@@ -355,7 +435,7 @@ async function AddProduct() {
         if (out.id_product >= 0) {
           document
             .getElementById("containerSerialAddedProducts")
-            .appendChild(formatCard(formdata_product,0,out.id_product));
+            .appendChild(formatCard(formdata_product, 0, out.id_product));
         }
       });
   } catch (error) {
@@ -363,24 +443,77 @@ async function AddProduct() {
   }
 }
 
-function formatCard(formData, timestamp = 0, id_product,market = false) {
+function searchProducts() {
+  let search_text = document.getElementById("cerca-prodotto-input").value;
+  document.getElementById("text-result-search").innerText =
+    "Risulatati per '" + search_text + "'";
+  let query = "allmk=false&allpro=false&search=" + search_text;
+  getProducts(query);
+}
+
+function getAllProductAdded() {
+  try {
+    fetch("../php/control.php?allmk=false&allpro=true", {
+      method: "GET",
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((out) => {
+        out.forEach((product_added) => {
+          let product_form = new FormData();
+          product_form.append("url-img-1", product_added.link_img1);
+          product_form.append("url-img-2", product_added.link_img2);
+          product_form.append("url-img-3", product_added.link_img3);
+          product_form.append("nominativo", product_added.nominativo);
+          product_form.append("categoria", product_added.categoria);
+          product_form.append("descrizione", product_added.descrizione);
+          product_form.append("prezzo", product_added.prezzo);
+          product_form.append("produttore", product_added.produttore);
+
+          document
+            .getElementById("container-added-products")
+            .appendChild(
+              formatCard(
+                product_form,
+                product_added.data_ora_inserimento,
+                product_added.id_prodotto
+              )
+            );
+        });
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function getDescrizioneFormatted(descrizione) {
+  let out = "";
+  let splitted = descrizione.split("#");
+  splitted.forEach((des) => {
+    out += `<li class="list-group-item">${des}</li>`;
+  });
+
+  return out;
+}
+
+function formatCard(formData, timestamp = 0, id_product) {
   let child_card_product = document.createElement("div");
   let prezzo = parseFloat(formData.get("prezzo")).toFixed(2);
   let w_aggiunto = "ADESSO";
   if (timestamp != 0) {
-    let now = Date.now();
-    let calc = now - timestamp;
-    w_aggiunto = `${Math.round(calc / 3600000)} ORE FA'`;
-  }
-
-  function getDescrizioneFormatted(descrizione) {
-    let out = "";
-    let splitted = formData.get("descrizione").split("#");
-    splitted.forEach((des) => {
-      out += `<li class="list-group-item">${des}</li>`;
-    });
-
-    return out;
+    let date = new Date(timestamp);
+    w_aggiunto =
+      "AGGIUNTO IL " +
+      date.getDate() +
+      "/" +
+      "" +
+      date.getMonth() +
+      " alle " +
+      date.getHours() +
+      " : " +
+      date.getMinutes();
   }
 
   child_card_product.innerHTML = `<div class="card mb-3">
@@ -484,7 +617,7 @@ function formatCard(formData, timestamp = 0, id_product,market = false) {
                       <a class="navbar-brand img-logo-source p-2 rounded"
                         href="${formData.get("link-dettagli")}">
                         <img
-                          src="${getIconBrand(formData.get("produttore"))}"
+                          src="${formData.get("produttore")}"
                           alt="Logo" width="20" height="20"
                           class="d-inline-block align-text-center rounded mb-1">
                           ${formData.get("produttore")}
@@ -544,26 +677,72 @@ function formatCard(formData, timestamp = 0, id_product,market = false) {
   return child_card_product;
 }
 
-
-async function getIconBrand(name_brand) {
-
-  let url_icon = ""
-
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Referer: ''
-    }
-  };
-  
-  fetch('https://api.brandfetch.io/v2/search/'+name_brand, options)
-    .then(response => response.json())
-    .then(response => {
-      url_icon = response[0].icon
-      console.log(url_icon,response[0].icon)
-      return url_icon
+async function getProducts(query) {
+  try {
+    fetch("../php/control.php?" + query, {
+      method: "GET",
+      header: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch(err => console.error(err));
-  
+      .then((response) => response.json())
+      .then((out) => {
+        var href = "#marketPlaceSerial";
+        window.location = href;
+        document.getElementById("marketPlaceSerial").innerHTML = "";
+        out.forEach((product) => {
+          document.getElementById("marketPlaceSerial").innerHTML +=
+            product.product_html;
+          let descrizione_area = document.getElementById(
+            "descrizione-" + product.id_product
+          );
+          descrizione_area.innerHTML = getDescrizioneFormatted(
+            product.descrizione_product
+          );
+        });
+        $(document).ready(function () {
+          $(".toast").toast();
+          $(".bookmark-btn").click(function () {
+            if ($(this).hasClass("clicked")) {
+              $(".toast.toast-aggiunto").html(
+                "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_remove</span>Prodotto rimosso tra i preferiti </div>"
+              );
+            } else {
+              $(".toast.toast-aggiunto").html(
+                "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_added</span>Prodotto aggiunto tra i preferiti </div>"
+              );
+            }
+            $(".toast.toast-aggiunto").toast("show");
+            $(this).toggleClass("clicked");
+          });
+        });
+      });
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+function formatProductCardMarketPlace(product) {
+  return product_html;
+}
+
+// async function getIconBrand(name_brand) {
+//   let url_icon = "";
+
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       accept: "application/json",
+//       Referer: "",
+//     },
+//   };
+
+//   fetch("https://api.brandfetch.io/v2/search/" + name_brand, options)
+//     .then((response) => response.json())
+//     .then((response) => {
+//       url_icon = response[0].icon;
+//       console.log(url_icon, response[0].icon);
+//       return url_icon;
+//     })
+//     .catch((err) => console.error(err));
+// }
