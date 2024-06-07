@@ -2,9 +2,6 @@
 require_once __DIR__ . '/DbControl.php';
 $db_control = DBControl::getDB('root', 'forge_db');
 
-
-
-
 if (isset($_POST['email-accesso']) && isset($_POST['password-accesso'])) {
   $email = $_POST['email-accesso'];
   $password = $_POST['password-accesso'];
@@ -13,6 +10,12 @@ if (isset($_POST['email-accesso']) && isset($_POST['password-accesso'])) {
 
   echo json_encode($arr_checking);
 
+  die();
+}
+
+if (isset($_POST['add'])) {
+  $out = $db_control->addOrRemoveProductFromPreferiti($_POST['add'], $_POST['id_product']);
+  echo json_encode(["out" => $out]);
   die();
 }
 
@@ -27,7 +30,6 @@ if (isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['password'
 
   echo json_encode($output_data);
   die();
-
 }
 
 if (isset($_POST['nominativo']) && isset($_POST['produttore'])) {
@@ -46,16 +48,21 @@ if (isset($_GET)) {
     echo json_encode($db_control->getNominativoAjax($_GET['term']));
     die();
   }
-  if ($_GET['allmk'] == "true" || isset($_GET['search'])) {
+  if(isset($_GET['preferiti'])){
+    $preferiti_product = $db_control->getPreferitiByUser();
+    echo json_encode($preferiti_product);
+    die();
+  }
+  if ((isset($_GET['allmk']) && $_GET['allmk'] == "true") || isset($_GET['search'])) {
     //controllo filtri
     $out = [];
     $products = [];
-    if($_GET['allmk'] == "true"){
+    if ($_GET['allmk'] == "true") {
       $products = $db_control->getAllProduct();
-    }elseif(isset($_GET['search'])){
-      $products = $db_control->getProductByTerm($_GET['search']);
+    } elseif (isset($_GET['search'])) {
+      $products = $db_control->getProductByTerm($_GET);
     }
-    
+
     $arr_produttori = [
       'ASUS',
       'AMD',
@@ -71,8 +78,7 @@ if (isset($_GET)) {
       'SAMSUNG',
       'LG',
       'SONY',
-      'TOSHIBA'
-      ,
+      'TOSHIBA',
       'FUJITSU',
       'BENQ',
       'CORSAIR',
@@ -92,7 +98,7 @@ if (isset($_GET)) {
         }
       }
       $bookmark_html = <<<user
-      <button type='button' class='btn btn-hover-dark-secondary bookmark-btn'>
+      <button type='button' class='btn btn-hover-dark-secondary bookmark-btn' id='btn-bookmark-{$product['id_prodotto']}'>
       <span class='material-symbols-outlined align-middle'>bookmark</span>
       </button>
 user;
@@ -122,11 +128,7 @@ ads;
       <button type='button' class='btn btn-warning font-questrial fw-bold'>
       <i class='fa fa-shopping-bag' aria-hidden='true'></i>
       COMPRA</button>
-    <button type='button' class='btn btn-hover-dark-secondary bookmark-btn'>
-      <span class='material-symbols-outlined align-middle'>
-        bookmark
-      </span>
-    </button>
+    
 user;
 
       $alert_cancel_modal_modify = <<<ads
@@ -299,16 +301,7 @@ ads;
               </div>
             </div>
           </div>
-          <div class='toast-container position-fixed bottom-0 start-0 p-3 font-questrial'>
-            <div class='row'>
-              <div class='col-auto'>
-                <div class='toast toast-modifica-profilo p-1' role='alert' aria-live='assertive'
-                  aria-atomic='true'>
-
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <!-- Modal -->
           <div class='modal fade' id='modale-prodotto-{$product['id_prodotto']}' data-bs-backdrop='static' data-bs-keyboard='false'
@@ -412,6 +405,7 @@ html;
       $arr['produttore_product'] = $product['produttore'];
       $arr['id_product'] = $product['id_prodotto'];
       $arr['table'] = $_SESSION['table'];
+      $arr['is_preferito_user'] = $db_control->isPreferitoById($arr['id_product']);
       array_push($out, $arr);
     }
 
@@ -423,5 +417,4 @@ html;
 
     echo json_encode($products);
   }
-
 }

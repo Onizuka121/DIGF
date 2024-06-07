@@ -7,6 +7,8 @@
 .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
   background: #ffc107 !important;
   color: #000000 !important;
+  border: none;
+  border-radius: 1%;
 } 
 
 
@@ -24,7 +26,7 @@
 }
 
 .img-preferiti {
-  max-width: 200px;
+  max-width: 300px;
   max-height: 200px;
   justify-self: center;
   margin: 0 auto;
@@ -94,7 +96,7 @@
 }
 
 .card {
-  background-color: #ffffffe0;
+  background-color: #ffffff;
   box-shadow: 0px 0px 20px 3px #00000068;
   height: 100%;
   min-height: 20%;

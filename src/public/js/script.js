@@ -1,6 +1,44 @@
-document
-  .getElementById("search-product-mk")
-  .addEventListener("click", searchProducts);
+try {
+  document
+    .getElementById("cerca-prodotto-input")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        searchProducts();
+      }
+    });
+} catch (error) {}
+
+async function addOrRemovePreferiti(add, id_product) {
+  const formdata_preferiti = new FormData();
+  formdata_preferiti.append("add", add);
+  formdata_preferiti.append("id_product", parseInt(id_product));
+
+  fetch("../php/control.php", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: formdata_preferiti,
+  })
+    .then((response) => response.json())
+    .then((out) => {
+      getAllPreferitiOfCurrentUser();
+    });
+}
+
+try {
+  document
+    .getElementById("search-product-mk")
+    .addEventListener("click", searchProducts);
+  document.getElementById("btn-filtri").addEventListener("click", filterData);
+} catch (error) {}
+
+let filtri = {
+  categoria: "",
+  produttore: "",
+  "prezzo-min": 0,
+  "prezzo-max": 99999,
+};
 
 let id_divs_nav_bar = [
   "li-mk-ID",
@@ -38,11 +76,9 @@ try {
     } else {
       visible_bar = false;
     }
-    console.log(visible_bar);
     document.getElementById("bar-main").style.width = width;
     document.getElementById("bar-child").style.width = width2;
     let elements = document.getElementsByClassName("text-bar");
-    console.log(typeof elements);
     Array.from(elements).forEach((element) => {
       element.style.display = display_text_bar;
     });
@@ -111,6 +147,64 @@ async function GetDataFromAi() {
       .then((response) => response.json())
       .then((out) => {
         console.log(out);
+        document.getElementById("assistenzaAIFunzione").style.display = "block";
+        document.getElementById("tutorialInizio").style.display = "none";
+        document.getElementById("container-go-riepilogo").innerHTML = ` 
+          <div class="list-group container shadow" style="max-width: 400px;">
+                  <a class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Categoria</h5>
+                      <p class="mb-1">${formdata_accesso.get(
+                        "selectCategoriaComputer2"
+                      )}</p>
+                    </div>
+
+                  </a>
+                  <a class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Tipologia</h5>
+                      <p class="mb-1">${formdata_accesso.get(
+                        "tipologia-pc"
+                      )}</p>
+                    </div>
+                  </a>
+                  <a class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Produttore</h5>
+                      <p class="mb-1">${formdata_accesso.get("produttore")}</p>
+                    </div>
+                  </a>
+                  <a  class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Budget</h5>
+                      <p class="mb-1">da ${formdata_accesso.get(
+                        "budget-min-pc"
+                      )}</p>
+                      <p class="mb-1">a ${formdata_accesso.get(
+                        "budget-max-pc"
+                      )}</p>
+                    </div>
+                  </a>
+                   <a  class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Memoria</h5>
+                      <p class="mb-1">RAM ${formdata_accesso.get(
+                        "memoria-ram"
+                      )}</p>
+                      <p class="mb-1">ROM ${formdata_accesso.get(
+                        "memoria-rom"
+                      )}</p>
+                    </div>
+                  </a>
+                  <a  class="list-group-item list-group-item-action">
+                    <div class="d-flexjustify-content-between">
+                      <h5 class="mb-1 fs-4">Altre specifiche</h5>
+                      <p class="mb-1">${formdata_accesso.get("altre-specifiche")}</p>
+                    </div>
+
+                  </a>
+                </div>
+        `;
       });
   } catch (error) {
     console.log(error);
@@ -200,6 +294,14 @@ function HandleAndView(
   div_nav_to_color = undefined,
   div_container_to_view = undefined
 ) {
+  if (!document.getElementById("cerca-prodotto-input").value.length > 0) {
+    getProducts("allmk=true&allpro=false");
+  }
+
+  if (div_nav_to_color.includes("li-pre-ID")) {
+    getAllPreferitiOfCurrentUser();
+  }
+
   ColorOrNotNavItem(div_nav_to_color);
   id_divs_container.forEach((element) => {
     if (
@@ -242,8 +344,6 @@ function ViewSalvaModifiche(number_id = "") {
     document.getElementById("invalidPassword1").style.display;
   let display_invalidpass2 =
     document.getElementById("invalidPassword2").style.display;
-
-  console.log(display_invalidpass1, display_invalidpass2);
   if (display_invalidpass1 == "none" && display_invalidpass2 == "none") {
     document.getElementById("SaveModificheSerial" + number_id).style.display =
       "block";
@@ -289,19 +389,6 @@ function CheckConfPass() {
   document.getElementById("SaveModificheSerial").style.display = "none";
   if (document.getElementById("btn-crea-account-serial") != null)
     document.getElementById("btn-crea-account-serial").disabled = true;
-}
-
-function CheckCategoriaComputer(isfilter = true) {
-  let id = isfilter ? "selectCategoriaComputer" : "selectCategoriaComputer2";
-  let id2 = isfilter ? "selectTipologiaComputer" : "selectTipologiaComputer2";
-  let categoria_selected = document.getElementById(id).value;
-  if (categoria_selected == "hardware") {
-    document.getElementById(id2).selectedIndex = 1;
-    document.getElementById(id2).disabled = true;
-  } else {
-    document.getElementById(id2).disabled = false;
-    document.getElementById(id2).selectedIndex = 0;
-  }
 }
 
 function formatCreditCardNumber() {
@@ -350,10 +437,6 @@ if (document.getElementById("inputCardNum") != null) {
       }
       event.target.value = formattedValue;
     });
-}
-
-function CancellaPreferito(id_card_preferito) {
-  document.getElementById(id_card_preferito).style.display = "none";
 }
 
 function ShowImageInDiv(name_input, mod = false, number_id = null) {
@@ -434,8 +517,12 @@ async function AddProduct() {
       .then((out) => {
         if (out.id_product >= 0) {
           document
-            .getElementById("containerSerialAddedProducts")
+            .getElementById("container-added-products")
             .appendChild(formatCard(formdata_product, 0, out.id_product));
+          $(".toast.toast-product-added").html(
+            "<div class='toast-body'> <span class='material-symbols-outlined align-middle p-1'>add_business</span> prodotto aggiunto nel market-place</div>"
+          );
+          $(".toast.toast-product-added").toast("show");
         }
       });
   } catch (error) {
@@ -445,8 +532,17 @@ async function AddProduct() {
 
 function searchProducts() {
   let search_text = document.getElementById("cerca-prodotto-input").value;
-  document.getElementById("text-result-search").innerText =
-    "Risulatati per '" + search_text + "'";
+  if (search_text.length <= 0) {
+    document.getElementById(
+      "text-result-search"
+    ).innerText = `I prodotti piu venduti negli store online`;
+  } else {
+    document.getElementById(
+      "text-result-search"
+    ).innerText = `Risultati per '${search_text}''
+    `;
+  }
+
   let query = "allmk=false&allpro=false&search=" + search_text;
   getProducts(query);
 }
@@ -677,9 +773,9 @@ function formatCard(formData, timestamp = 0, id_product) {
   return child_card_product;
 }
 
-async function getProducts(query) {
+async function getAllPreferitiOfCurrentUser() {
   try {
-    fetch("../php/control.php?" + query, {
+    fetch("../php/control.php?preferiti=true", {
       method: "GET",
       header: {
         "Content-Type": "application/json",
@@ -687,8 +783,208 @@ async function getProducts(query) {
     })
       .then((response) => response.json())
       .then((out) => {
-        var href = "#marketPlaceSerial";
-        window.location = href;
+        if (out.length == 0) {
+          document.getElementById("preferiti-container").innerHTML = "";
+          document.getElementById(
+            "container-center-no-pre"
+          ).innerHTML = `<h1 class="text-light fs-2 font-questrial" id="text-result-search">Non ci sono preferiti,
+                scegli i tuoi prodotti preferiti cliccando sull'icona 
+                <span class="material-symbols-outlined align-middle text-light fs-2">
+                  bookmark
+                </span>
+              </h1>`;
+        } else {
+          document.getElementById("preferiti-container").innerHTML = "";
+          document.getElementById("container-center-no-pre").innerHTML = "";
+          out.forEach((preferito) => {
+            document.getElementById("preferiti-container").innerHTML +=
+              getFormattedCardPreferiti(preferito);
+          });
+        }
+      });
+  } catch (error) {
+    console.log(error);
+  }
+
+  function getFormattedCardPreferiti(preferito) {
+    let preferito_html = `
+       <div class="card mb-3" id="preferito-id-${preferito.id_prodotto}">
+              <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center">
+                  <img src="${
+                    preferito.link_img1
+                  }" class="img-fluid mx-auto img-preferiti" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h6 class="text-center"><small class="text-body-secondary font-questrial">${
+                      preferito.categoria
+                    }</small>
+                    </h6>
+                    <h5 class="card-title fw-bold fs-4 text-center font-questrial">Apple MacBook Air Test 1</h5>
+                    <h6 class="font-questrial fw-bold text-warning-secondary text-center fs-5">$ ${
+                      preferito.prezzo
+                    }</h6>
+                    <hr>
+                    <div class="container-fluid d-flex justify-content-center gap-5">
+                      <button type="button" class="btn btn-hover-dark-secondary rounded-5 p-3" data-bs-toggle="modal" data-bs-target="#modale-prodotto-${
+                        preferito.id_prodotto
+                      }-preferito">
+                        <span class="material-symbols-outlined align-middle">
+                          visibility
+                        </span>
+                      </button>
+                      <button type="button" class="btn btn-hover-dark-secondary rounded-5 p-3" onclick="addOrRemovePreferiti(false,${
+                        preferito.id_prodotto
+                      })">
+                        <span class="material-symbols-outlined align-middle">
+                          cancel
+                        </span>
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="modale-prodotto-${
+                        preferito.id_prodotto
+                      }-preferito" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="label-${
+      preferito.id_prodotto
+    }" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5 font-questrial fw-bold" id="label-${
+                                preferito.id_prodotto
+                              }">${preferito.nominativo}</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div id="carouselExampleDark-${
+                                preferito.id_prodotto
+                              }" class="carousel carousel-dark slide">
+                                <div class="carousel-indicators">
+                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                    preferito.id_prodotto
+                                  }" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                    preferito.id_prodotto
+                                  }" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                    preferito.id_prodotto
+                                  }" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active" data-bs-interval="1000">
+                                    <img src="${
+                                      preferito.link_img1
+                                    }" class="d-block img-carousel" alt="...">
+                                  </div>
+                                  <div class="carousel-item" data-bs-interval="1000">
+                                    <img src="${
+                                      preferito.link_img2
+                                    }" class="d-block img-carousel" alt="...">
+
+                                  </div>
+                                  <div class="carousel-item">
+                                    <img src="${
+                                      preferito.link_img3
+                                    }" class="d-block img-carousel" alt="...">
+                                  </div>
+                                </div>
+                                <br>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark-${
+                                  preferito.link_img1
+                                }" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark-${
+                                  preferito.link_img1
+                                }" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                              </div>
+                              <div class="card-body">
+                                <h6 class="text-center"><small class="text-body-secondary font-questrial">${
+                                  preferito.categoria
+                                }</small>
+                                </h6>
+                                <h5 class="card-title fw-bold fs-4 text-center font-questrial">${
+                                  preferito.nominativo
+                                }</h5>
+                                <h6 class="font-questrial fw-bold text-warning-secondary text-center fs-5">$ ${
+                                  preferito.prezzo
+                                }
+                                </h6>
+
+                                <hr>
+                                <p class="fw-bold fs-5 font-questrial text-center">Descrizione</p>
+
+                                <ul class="list-group font-questrial shadow">
+                                  ${getDescrizioneFormatted(
+                                    preferito.descrizione
+                                  )}
+                                </ul>
+
+                              </div>
+                              <nav class="navbar">
+                                <div class="container-fluid d-flex w-100 p-1">
+                                  <a class="navbar-brand img-logo-source p-2 rounded" href="${
+                                    preferito.link_sito_app
+                                  }">
+                                    <img src="https://w7.pngwing.com/pngs/121/286/png-transparent-apple-logo-computer-icons-apple-logo-company-heart-logo-thumbnail.png" alt="Logo" width="20" height="20" class="d-inline-block align-text-center rounded mb-1">
+                                    Apple
+                                  </a>
+                                  <a href="${preferito.link_sito_app}">
+                                  <button type="button" class="btn img-logo-source font-questrial">
+                                    <i class="fa fa-link" aria-hidden="true"></i>
+                                    Più dettagli
+                                  </button>
+                                  </a>
+                                </div>
+                              </nav>
+
+                            </div>
+                            <div class="modal-footer w-100">
+                             <a href="${preferito.link_sito_app}">
+                              <button type="button" class="btn btn-warning font-questrial fw-bold">
+                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                COMPRA</button>
+                                 </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    `;
+
+    return preferito_html;
+  }
+}
+
+async function getProducts(query) {
+  let filter_query = `&categoria=${filtri.categoria}&produttore=${filtri.produttore}&prezzo-min=${filtri["prezzo-min"]}&prezzo-max=${filtri["prezzo-max"]}`;
+
+  try {
+    fetch("../php/control.php?" + query + filter_query, {
+      method: "GET",
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((out) => {
+        if (
+          query.includes("allmk=false&allpro=false&search") ||
+          query.includes("categoria")
+        ) {
+          if (out.length <= 0) {
+            document.getElementById(
+              "text-result-search"
+            ).innerText = `Non ci sono prodotti con questa ricerca
+              `;
+          }
+        }
         document.getElementById("marketPlaceSerial").innerHTML = "";
         out.forEach((product) => {
           document.getElementById("marketPlaceSerial").innerHTML +=
@@ -700,6 +996,7 @@ async function getProducts(query) {
             product.descrizione_product
           );
         });
+
         $(document).ready(function () {
           $(".toast").toast();
           $(".bookmark-btn").click(function () {
@@ -707,13 +1004,23 @@ async function getProducts(query) {
               $(".toast.toast-aggiunto").html(
                 "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_remove</span>Prodotto rimosso tra i preferiti </div>"
               );
+              addOrRemovePreferiti(false, $(this)[0].id.slice(13));
             } else {
               $(".toast.toast-aggiunto").html(
                 "<div class='toast-body'> <span class='material-symbols-outlined align-middle'>bookmark_added</span>Prodotto aggiunto tra i preferiti </div>"
               );
+
+              addOrRemovePreferiti(true, $(this)[0].id.slice(13));
             }
             $(".toast.toast-aggiunto").toast("show");
             $(this).toggleClass("clicked");
+          });
+          out.forEach((product) => {
+            if (product.is_preferito_user) {
+              $(
+                document.getElementById("btn-bookmark-" + product.id_product)
+              ).toggleClass("clicked");
+            }
           });
         });
       });
@@ -722,8 +1029,43 @@ async function getProducts(query) {
   }
 }
 
-function formatProductCardMarketPlace(product) {
-  return product_html;
+async function filterData() {
+  filtri.categoria = document.getElementById("selectCategoriaComputer").value;
+  filtri.produttore = document.getElementById("serialproduttore").value;
+  filtri["prezzo-min"] = parseFloat(
+    document.getElementById("serialprezzo-da").value
+  );
+  filtri["prezzo-max"] = parseFloat(
+    document.getElementById("serialprezzo-a").value
+  );
+
+  let span_badge = document.getElementById("span-badge-filtri-nums");
+  let span_badge_child = document.getElementById("nums-badge");
+  let count = 0;
+  if (filtri.categoria != "") {
+    count += 1;
+  }
+  if (filtri.produttore != "") {
+    count += 1;
+  }
+  if (filtri["prezzo-min"] > 0) {
+    count += 1;
+  }
+  if (filtri["prezzo-max"] < 99999) {
+    count += 1;
+  }
+  if (count > 0) {
+    span_badge.style.display = "block";
+    span_badge_child.innerText = count;
+  } else {
+    span_badge.style.display = "none";
+    span_badge_child.innerText = "";
+  }
+
+  $(".toast.toast-filter-product").html(
+    "<div class='toast-body'> <span class='material-symbols-outlined align-middle p-1'>filter_alt</span> filtri applicati</div>"
+  );
+  $(".toast.toast-filter-product").toast("show");
 }
 
 // async function getIconBrand(name_brand) {

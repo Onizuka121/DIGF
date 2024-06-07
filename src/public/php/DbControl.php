@@ -178,9 +178,55 @@ class DBControl
 
     public function getProductByTerm($term): array
     {
-        $sql = "SELECT * FROM prodotti WHERE nominativo LIKE '%{$term}%' LIMIT 15";
-        $result = $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);;
+        $sql = "SELECT * 
+                FROM prodotti 
+                WHERE nominativo LIKE '%{$term['search']}%'
+                AND categoria LIKE '%{$term['categoria']}%'
+                AND produttore LIKE '%{$term['produttore']}%'
+                AND prezzo BETWEEN {$term['prezzo-min']} AND {$term['prezzo-max']}
+                ORDER BY data_ora_inserimento DESC
+                LIMIT 15";
 
+        $result = $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+
+        return $result;
+    }
+
+    public function addOrRemoveProductFromPreferiti($is_add, $id_product): bool
+    {
+        $sql = "INSERT INTO preferiti (id_prodotto_pre,email_user_pre)
+            VALUES ({$id_product},'{$_SESSION['email_user']}')
+            ";
+        if ($is_add == "false") {
+            $sql = "DELETE FROM preferiti 
+                    WHERE preferiti.id_prodotto_pre = {$id_product} AND preferiti.email_user_pre = '{$_SESSION['email_user']}'
+            ";
+        }
+        $result = $this->conn->query($sql);
+
+        return $result;
+    }
+
+    public function isPreferitoById($id_product): bool
+    {
+        $sql = "SELECT *
+                FROM preferiti
+                WHERE preferiti.id_prodotto_pre = {$id_product} AND preferiti.email_user_pre = '{$_SESSION['email_user']}'
+                ";
+        $result = $this->conn->query($sql);
+        return ($result->num_rows > 0);
+    }
+
+    public function getPreferitiByUser(): array
+    {
+        $sql = "SELECT preferiti.id_preferito,prodotti.*
+                FROM preferiti
+                INNER JOIN prodotti
+                ON preferiti.id_prodotto_pre = prodotti.id_prodotto
+                WHERE preferiti.email_user_pre = '{$_SESSION['email_user']}'
+                ";
+        $result = $this->conn->query($sql)->fetch_all(MYSQLI_ASSOC);  
+        
         return $result;
     }
 }

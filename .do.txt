@@ -3,10 +3,8 @@
 - continua nello sviluppo della parte aggiungi prodotto
   - sistema la parte di stampa del prodotto aggiunto 
 
+fare parte di filtraggio
 
+abortire sessione 
 
-text-result-search
-
-marketPlaceSerial
-
-  
+aggiustare la ricerca - quando uno cerca e cambia pagina e poi torna la ricerca deve rimanere 

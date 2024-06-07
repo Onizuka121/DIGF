@@ -15,7 +15,7 @@ services:
     container_name: digitalforge-nginx
     restart: always
     ports:
-      - "8000:80"
+      - "80:80"
     volumes:
       - ../src:/var/www
       - ./nginx:/etc/nginx/conf.d
