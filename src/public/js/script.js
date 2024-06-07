@@ -657,13 +657,13 @@ function formatCard(formData, timestamp = 0, id_product) {
                     aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <div id="carouselExampleDark-${id_product}" class="carousel carousel-dark slide">
+                  <div id="carouselExampleDark-added-${id_product}" class="carousel carousel-dark slide">
                     <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="0"
+                      <button type="button" data-bs-target="#carouselExampleDark-added-${id_product}" data-bs-slide-to="0"
                         class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="1"
+                      <button type="button" data-bs-target="#carouselExampleDark-added-${id_product}" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide-to="2"
+                      <button type="button" data-bs-target="#carouselExampleDark-added-${id_product}" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
@@ -683,11 +683,11 @@ function formatCard(formData, timestamp = 0, id_product) {
                     </div>
                     <br>
                     <button class="carousel-control-prev" type="button"
-                      data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide="prev">
+                      data-bs-target="#carouselExampleDark-added-${id_product}" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     </button>
                     <button class="carousel-control-next" type="button"
-                      data-bs-target="#carouselExampleDark-${id_product}" data-bs-slide="next">
+                      data-bs-target="#carouselExampleDark-added-${id_product}" data-bs-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </button>
                   </div>
@@ -856,17 +856,17 @@ async function getAllPreferitiOfCurrentUser() {
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <div id="carouselExampleDark-${
+                              <div id="carouselExampleDark-preferito-${
                                 preferito.id_prodotto
                               }" class="carousel carousel-dark slide">
                                 <div class="carousel-indicators">
-                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                  <button type="button" data-bs-target="#carouselExampleDark-preferito-${
                                     preferito.id_prodotto
                                   }" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                  <button type="button" data-bs-target="#carouselExampleDark-preferito-${
                                     preferito.id_prodotto
                                   }" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                  <button type="button" data-bs-target="#carouselExampleDark-${
+                                  <button type="button" data-bs-target="#carouselExampleDark-preferito-${
                                     preferito.id_prodotto
                                   }" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
@@ -889,12 +889,12 @@ async function getAllPreferitiOfCurrentUser() {
                                   </div>
                                 </div>
                                 <br>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark-${
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark-preferito-${
                                   preferito.link_img1
                                 }" data-bs-slide="prev">
                                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark-${
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark-preferito-${
                                   preferito.link_img1
                                 }" data-bs-slide="next">
                                   <span class="carousel-control-next-icon" aria-hidden="true"></span>

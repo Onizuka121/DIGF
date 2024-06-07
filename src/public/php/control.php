@@ -318,13 +318,13 @@ ads;
                     aria-label='Close'></button>
                 </div>
                 <div class='modal-body'>
-                  <div id='carouselExampleDark-{$product['id_prodotto']}' class='carousel carousel-dark slide'>
+                  <div id='carouselExampleDark-prodotto-{$product['id_prodotto']}' class='carousel carousel-dark slide'>
                     <div class='carousel-indicators'>
-                      <button type='button' data-bs-target='#carouselExampleDark-{$product['id_prodotto']}' data-bs-slide-to='0'
+                      <button type='button' data-bs-target='#carouselExampleDark-prodotto-{$product['id_prodotto']}' data-bs-slide-to='0'
                         class='active' aria-current='true' aria-label='Slide 1'></button>
-                      <button type='button' data-bs-target='#carouselExampleDark-{$product['id_prodotto']}' data-bs-slide-to='1'
+                      <button type='button' data-bs-target='#carouselExampleDark-prodotto-{$product['id_prodotto']}' data-bs-slide-to='1'
                         aria-label='Slide 2'></button>
-                      <button type='button' data-bs-target='#carouselExampleDark-{$product['id_prodotto']}' data-bs-slide-to='2'
+                      <button type='button' data-bs-target='#carouselExampleDark-prodotto-{$product['id_prodotto']}' data-bs-slide-to='2'
                         aria-label='Slide 3'></button>
                     </div>
                     <div class='carousel-inner'>
@@ -344,11 +344,11 @@ ads;
                     </div>
                     <br>
                     <button class='carousel-control-prev' type='button'
-                      data-bs-target='#carouselExampleDark-{$product['id_prodotto']}' data-bs-slide='prev'>
+                      data-bs-target='#carouselExampleDark-prodotto-{$product['id_prodotto']}' data-bs-slide='prev'>
                       <span class='carousel-control-prev-icon' aria-hidden='true'></span>
                     </button>
                     <button class='carousel-control-next' type='button'
-                      data-bs-target='#carouselExampleDark-{$product['id_prodotto']}' data-bs-slide='next'>
+                      data-bs-target='#carouselExampleDark-prodotto-{$product['id_prodotto']}' data-bs-slide='next'>
                       <span class='carousel-control-next-icon' aria-hidden='true'></span>
                     </button>
                   </div>

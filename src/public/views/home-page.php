@@ -1266,12 +1266,12 @@ $db_control = DBControl::getDB("root", "forge_db"); ?>
           <div class="container-fluid vstack" id="assistenzaAIFunzione" style="display:none;">
             <div class="container-fluid">
               <div class="row justify-content-center" id="container-go-riepilogo">
-                
+
               </div>
               <br>
               <div class="row border-top pt-3 pb-2">
                 <h1 class="text-light fs-1 font-questrial fw-bold col">Risposta AI</h1>
-                
+
               </div>
               <div class="container border border-light p-2 rounded-4 shadow">
                 ciao questa e riosposta ai
@@ -1294,453 +1294,453 @@ $db_control = DBControl::getDB("root", "forge_db"); ?>
           </div>
           <div class="container-fluid vstack gap-4 " style="max-width: 1000px;" id="preferiti-container">
 
+
           </div>
         </div>
       </div>
-  </div>
-  <?php
-  if ($_SESSION['table'] == "utenti_ads") :
-  ?>
-    <div class="col bg-dark" id="serialAddProductContainer">
-      <nav class="navbar border-top bg-warning border-warning rounded">
-        <div class="container-fluid">
-          <a class="navbar-brand font-questrial fs-3 text-dark d-none d-sm-block fw-bold">
-            Aggiungi prodotto
-          </a>
-          <button type="button" class="btn btn-dark font-questrial text-warning fw-bold d-flex gap-1" data-bs-toggle="modal" data-bs-target="#modalAggiungiProdotto">
-            <span class="material-symbols-outlined align-middle">
-              add
-            </span>
-            AGGIUNGI
-          </button>
-        </div>
-      </nav>
-      <div class="container-fluid overflow-y-auto bg-dark rounded p-4 mt-4 " id="style-1">
+      <?php
+      if ($_SESSION['table'] == "utenti_ads") :
+      ?>
+        <div class="col bg-dark" id="serialAddProductContainer">
+          <nav class="navbar border-top bg-warning border-warning rounded">
+            <div class="container-fluid">
+              <a class="navbar-brand font-questrial fs-3 text-dark d-none d-sm-block fw-bold">
+                Aggiungi prodotto
+              </a>
+              <button type="button" class="btn btn-dark font-questrial text-warning fw-bold d-flex gap-1" data-bs-toggle="modal" data-bs-target="#modalAggiungiProdotto">
+                <span class="material-symbols-outlined align-middle">
+                  add
+                </span>
+                AGGIUNGI
+              </button>
+            </div>
+          </nav>
+          <div class="container-fluid overflow-y-auto bg-dark rounded p-4 mt-4 " id="style-1">
 
-        <div class="container-fluid vstack gap-4" style="max-width: 840px;">
-          <div class="d-flex container-fluid gap-4 flex-column" id="container-added-products">
-          </div>
+            <div class="container-fluid vstack gap-4" style="max-width: 840px;">
+              <div class="d-flex container-fluid gap-4 flex-column" id="container-added-products">
+              </div>
 
-          <div class="modal fade text-dark font-questrial" id="modalAggiungiProdotto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-4 font-questrial fw-bold text-center" id="staticBackdropLabel">
-                    Aggiungi prodotto
-                  </h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="modal fade text-dark font-questrial" id="modalAggiungiProdotto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-4 font-questrial fw-bold text-center" id="staticBackdropLabel">
+                        Aggiungi prodotto
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card-body text-dark">
+                        <div class="mb-3 container p-3 g-1 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              link
+                            </span>
+                            Link immagini</label>
+                          <input placeholder="Incolla qui il link della prima immagine" title="Inpit title" id="url-img-1" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('1')">
+                          <br>
+                          <div class="container" id="container-image-1"></div>
+                          <input placeholder="Incolla qui il link della seconda immagine" title="Inpit title" id="url-img-2" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('2')">
+                          <div class="container" id="container-image-2"></div>
+                          <br>
+                          <input placeholder="Incolla qui il link della terza immagine" title="Inpit title" id="url-img-3" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('3')">
+                          <div class="container" id="container-image-3"></div>
+                        </div>
+                        <hr class="hr-menu">
+                        <div class="mb-3 container p-3 g-4 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              sports_esports
+                            </span>
+                            Nominativo</label>
+                          <input placeholder="Nominativo prodotto" title="Inpit title" id="nominativo" type="text" class="input_field2 form-control font-questrial">
+                        </div>
+                        <div class="mb-3 container p-3 g-4 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              link
+                            </span>
+                            Link Dettagli</label>
+                          <input placeholder="Link dettagli prodotto" title="Inpit title" id="link-dettagli" type="url" class="input_field2 form-control font-questrial">
+                        </div>
+                        <div class="mb-3 container p-3 g-1 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              view_cozy
+                            </span>
+                            Categoria</label>
+                          <select class="form-select form-select-lg border-dark" id="selectCategoriaComputer-add">
+                            <option selected>seleziona categoria</option>
+                            <option value="laptop">PC Notebook</option>
+                            <option value="desktop">PC Desktop</option>
+                            <option value="desktop">PC All-in-one</option>
+                            <option value="hardware">Componenti hardware</option>
+                          </select>
+                        </div>
+                        <div class="mb-3 container p-3 g-4 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              precision_manufacturing
+                            </span>
+                            Produttore</label>
+                          <select class="form-select form-select-lg border-dark" id="produttore">
+                            <option selected>seleziona produttore</option>
+                            <option value="ASUS">ASUS</option>
+                            <option value="ACER">ACER</option>
+                            <option value="AMD">AMD</option>
+                            <option value="APPLE">APPLE</option>
+                            <option value="DELL">DELL</option>
+                            <option value="HP">HP</option>
+                            <option value="LENOVO">LENOVO</option>
+                            <option value="MICROSOFT">MICROSOFT</option>
+                            <option value="NVIDIA">NVIDIA</option>
+                            <option value="INTEL">INTEL</option>
+                            <option value="MSI">MSI</option>
+                            <option value="GIGABYTE">GIGABYTE</option>
+                            <option value="ASROCK">ASROCK</option>
+                            <option value="SAMSUNG">SAMSUNG</option>
+                            <option value="LG">LG</option>
+                            <option value="SONY">SONY</option>
+                            <option value="TOSHIBA">TOSHIBA</option>
+                            <option value="FUJITSU">FUJITSU</option>
+                            <option value="BENQ">BENQ</option>
+                            <option value="RAZER">RAZER</option>
+                            <option value="CORSAIR">CORSAIR</option>
+                            <option value="LOGITECH">LOGITECH</option>
+                            <option value="STEELSERIES">STEELSERIES</option>
+                            <option value="RAIDMAX">RAIDMAX</option>
+                          </select>
+                        </div>
+                        <div class="mb-3 container p-3 g-4 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              payments
+                            </span>
+                            Prezzo (€)</label>
+                          <input placeholder="Inserisci prezzo" title="Inpit title" id="prezzo" type="number" class="input_field2 form-control font-questrial">
+                        </div>
+                        <div class="mb-3 container p-3 g-4 font-questrial">
+                          <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
+                            <span class="material-symbols-outlined align-middle">
+                              other_admission
+                            </span>
+                            Descrizione</label>
+                          <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Inserisci qui la descrizione</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer w-100">
+                      <button type="button" class="btn btn-warning font-questrial fw-bold d-flex mx-auto" data-bs-dismiss="modal" aria-label="Close" id="btn-add-product">
+                        AGGIUNGI</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-body">
-                  <div class="card-body text-dark">
-                    <div class="mb-3 container p-3 g-1 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          link
-                        </span>
-                        Link immagini</label>
-                      <input placeholder="Incolla qui il link della prima immagine" title="Inpit title" id="url-img-1" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('1')">
-                      <br>
-                      <div class="container" id="container-image-1"></div>
-                      <input placeholder="Incolla qui il link della seconda immagine" title="Inpit title" id="url-img-2" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('2')">
-                      <div class="container" id="container-image-2"></div>
-                      <br>
-                      <input placeholder="Incolla qui il link della terza immagine" title="Inpit title" id="url-img-3" type="url" class="input_field2 form-control font-questrial" onchange="ShowImageInDiv('3')">
-                      <div class="container" id="container-image-3"></div>
+              </div>
+            </div>
+
+
+
+            <br><br><br>
+            <footer class="footer float-bottom border-top border-secondary">
+              <!-- Widgets - Bootstrap Brain Component -->
+              <section class="bg-dark py-4 py-md-5 py-xl-8 text-light border-bottom border-secondary font-questrial">
+                <div class="container overflow-hidden">
+                  <div class="row gy-4 gy-lg-0 justify-content-xl-between">
+                    <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                      <div class="widget">
+                        <a class="text-light fw-bold fs-5 text-decoration-none" href="">
+                          <img src="https://zammad.com/media/pages/product/features/gitlab-integration/693fc93d4d-1698589015/gitlab_integration.png" alt="DIGITALFORGE" width="60" height="60">DIGITALFORGE
+                        </a>
+                      </div>
                     </div>
-                    <hr class="hr-menu">
-                    <div class="mb-3 container p-3 g-4 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          sports_esports
-                        </span>
-                        Nominativo</label>
-                      <input placeholder="Nominativo prodotto" title="Inpit title" id="nominativo" type="text" class="input_field2 form-control font-questrial">
+                    <div class="col-12 col-md-4 col-lg-3 col-xl-3">
+                      <div class="widget">
+                        <h4 class="widget-title mb-4 fw-bold">Contattaci</h4>
+                        <address class="mb-4"><a class="link-secondary text-decoration-none" href="https://maps.app.goo.gl/rLgtUrixqP7FiUJU7">Via Grottaferrata
+                            23,Roma,Italia</a>
+                        </address>
+                        <p class="mb-1">
+                          <a class="link-secondary text-decoration-none">(+39)
+                            351-890-2314</a>
+                        </p>
+                        <p class="mb-0">
+                          <a class="link-secondary text-decoration-none">digitalforge@gmail.com</a>
+                        </p>
+                      </div>
                     </div>
-                    <div class="mb-3 container p-3 g-4 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          link
-                        </span>
-                        Link Dettagli</label>
-                      <input placeholder="Link dettagli prodotto" title="Inpit title" id="link-dettagli" type="url" class="input_field2 form-control font-questrial">
+                    <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                      <div class="widget">
+                        <h4 class="widget-title mb-4 fw-bold">Scopri di piu'</h4>
+                        <ul class="list-unstyled">
+                          <li class="mb-2">
+                            <a href="" class="link-secondary text-decoration-none">About</a>
+                          </li>
+                          <li class="mb-2">
+                            <a href="" class="link-secondary text-decoration-none">Contact</a>
+                          </li>
+                          <li class="mb-2">
+                            <a href="" class="link-secondary text-decoration-none">Advertise</a>
+                          </li>
+                          <li class="mb-2">
+                            <a href="" class="link-secondary text-decoration-none">Terms of
+                              Service</a>
+                          </li>
+                          <li class="mb-0">
+                            <a href="" class="link-secondary text-decoration-none">Privacy
+                              Policy</a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                    <div class="mb-3 container p-3 g-1 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          view_cozy
-                        </span>
-                        Categoria</label>
-                      <select class="form-select form-select-lg border-dark" id="selectCategoriaComputer-add">
-                        <option selected>seleziona categoria</option>
-                        <option value="laptop">PC Notebook</option>
-                        <option value="desktop">PC Desktop</option>
-                        <option value="desktop">PC All-in-one</option>
-                        <option value="hardware">Componenti hardware</option>
-                      </select>
-                    </div>
-                    <div class="mb-3 container p-3 g-4 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          precision_manufacturing
-                        </span>
-                        Produttore</label>
-                      <select class="form-select form-select-lg border-dark" id="produttore">
-                        <option selected>seleziona produttore</option>
-                        <option value="ASUS">ASUS</option>
-                        <option value="ACER">ACER</option>
-                        <option value="AMD">AMD</option>
-                        <option value="APPLE">APPLE</option>
-                        <option value="DELL">DELL</option>
-                        <option value="HP">HP</option>
-                        <option value="LENOVO">LENOVO</option>
-                        <option value="MICROSOFT">MICROSOFT</option>
-                        <option value="NVIDIA">NVIDIA</option>
-                        <option value="INTEL">INTEL</option>
-                        <option value="MSI">MSI</option>
-                        <option value="GIGABYTE">GIGABYTE</option>
-                        <option value="ASROCK">ASROCK</option>
-                        <option value="SAMSUNG">SAMSUNG</option>
-                        <option value="LG">LG</option>
-                        <option value="SONY">SONY</option>
-                        <option value="TOSHIBA">TOSHIBA</option>
-                        <option value="FUJITSU">FUJITSU</option>
-                        <option value="BENQ">BENQ</option>
-                        <option value="RAZER">RAZER</option>
-                        <option value="CORSAIR">CORSAIR</option>
-                        <option value="LOGITECH">LOGITECH</option>
-                        <option value="STEELSERIES">STEELSERIES</option>
-                        <option value="RAIDMAX">RAIDMAX</option>
-                      </select>
-                    </div>
-                    <div class="mb-3 container p-3 g-4 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          payments
-                        </span>
-                        Prezzo (€)</label>
-                      <input placeholder="Inserisci prezzo" title="Inpit title" id="prezzo" type="number" class="input_field2 form-control font-questrial">
-                    </div>
-                    <div class="mb-3 container p-3 g-4 font-questrial">
-                      <label for="" class="form-label font-questrial fs-5 fw-bold d-flex gap-1">
-                        <span class="material-symbols-outlined align-middle">
-                          other_admission
-                        </span>
-                        Descrizione</label>
-                      <div class="form-floating">
-                        <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="floatingTextarea2">Inserisci qui la descrizione</label>
+                    <div class="col-12 col-lg-3 col-xl-4">
+                      <div class="widget">
+                        <h4 class="widget-title mb-4 fw-bold">Nostra Newsletter</h4>
+                        <p class="mb-4">Subscribe to our newsletter to get our news & discounts
+                          delivered to you.</p>
+                        <form action="">
+                          <div class="row gy-4">
+                            <div class="col-12">
+                              <div class="input-group">
+                                <span class="input-group-text" id="email-newsletter-addon">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                                  </svg>
+                                </span>
+                                <input type="email" class="form-control" id="email-newsletter" value="" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="d-grid">
+                                <button class="btn btn-warning" type="submit">Invia</button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer w-100">
-                  <button type="button" class="btn btn-warning font-questrial fw-bold d-flex mx-auto" data-bs-dismiss="modal" aria-label="Close" id="btn-add-product">
-                    AGGIUNGI</button>
+              </section>
+              <div class="bg-dark py-4 py-md-5 py-xl-8 text-light font-questrial">
+                <div class="container overflow-hidden">
+                  <div class="row gy-4 gy-md-0">
+                    <div class="col-xs-12 col-md-7 order-1 order-md-0">
+                      <div class="copyright text-center text-md-start">
+                        &copy; 2024. All Rights Reserved.
+                      </div>
+                      <div class="credits text-secondary text-center text-md-start mt-2 fs-7">
+                        Built by <a class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with
+                        <span class="text-warning">&#9829</span>
+                      </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 order-0 order-md-1">
+                      <ul class="nav justify-content-center justify-content-md-end">
+                        <li class="nav-item">
+                          <a class="nav-link link-warning" href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link link-warning" href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                              <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link link-warning" href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link link-warning" href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </footer>
+            <br>
           </div>
+
         </div>
+      <?php
+      endif
+      ?>
+      <div class="col bg-dark" id="serialHelpContainer">
+        <nav class="navbar border-top bg-warning border-warning rounded">
+          <div class="container-fluid">
+            <a class="navbar-brand font-questrial fs-3 text-dark d-none d-sm-block fw-bold">
+              Aiuto
+            </a>
+          </div>
+        </nav>
+        <div class="container-fluid overflow-y-auto bg-dark rounded p-4 mt-4" id="style-1">
+          <div class="container-fluid vstack">
+            <div class="container-fluid">
+              <h1 class="text-light fs-2 font-questrial">Contattaci inviandoci una email a questo
+                indirizzo <a href="">digitalforge@gmail.com</a> <br><br>
+                Oppure chiamaci al numero (+39) 351-890-2314
+              </h1>
+              <br>
+            </div>
 
-
-
-        <br><br><br>
-        <footer class="footer float-bottom border-top border-secondary">
-          <!-- Widgets - Bootstrap Brain Component -->
-          <section class="bg-dark py-4 py-md-5 py-xl-8 text-light border-bottom border-secondary font-questrial">
-            <div class="container overflow-hidden">
-              <div class="row gy-4 gy-lg-0 justify-content-xl-between">
-                <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                  <div class="widget">
-                    <a class="text-light fw-bold fs-5 text-decoration-none" href="">
-                      <img src="https://zammad.com/media/pages/product/features/gitlab-integration/693fc93d4d-1698589015/gitlab_integration.png" alt="DIGITALFORGE" width="60" height="60">DIGITALFORGE
-                    </a>
+          </div>
+          <br><br>
+          <footer class="footer float-bottom border-top border-secondary">
+            <!-- Widgets - Bootstrap Brain Component -->
+            <section class="bg-dark py-4 py-md-5 py-xl-8 text-light border-bottom border-secondary font-questrial">
+              <div class="container overflow-hidden">
+                <div class="row gy-4 gy-lg-0 justify-content-xl-between">
+                  <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                    <div class="widget">
+                      <a class="text-light fw-bold fs-5 text-decoration-none" href="">
+                        <img src="https://zammad.com/media/pages/product/features/gitlab-integration/693fc93d4d-1698589015/gitlab_integration.png" alt="DIGITALFORGE" width="60" height="60">DIGITALFORGE
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 col-xl-3">
+                    <div class="widget">
+                      <h4 class="widget-title mb-4 fw-bold">Contattaci</h4>
+                      <address class="mb-4"><a class="link-secondary text-decoration-none" href="https://maps.app.goo.gl/rLgtUrixqP7FiUJU7">Via Grottaferrata
+                          23,Roma,Italia</a>
+                      </address>
+                      <p class="mb-1">
+                        <a class="link-secondary text-decoration-none">(+39)
+                          351-890-2314</a>
+                      </p>
+                      <p class="mb-0">
+                        <a class="link-secondary text-decoration-none">digitalforge@gmail.com</a>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                    <div class="widget">
+                      <h4 class="widget-title mb-4 fw-bold">Scopri di piu'</h4>
+                      <ul class="list-unstyled">
+                        <li class="mb-2">
+                          <a href="" class="link-secondary text-decoration-none">About</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="" class="link-secondary text-decoration-none">Contact</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="" class="link-secondary text-decoration-none">Advertise</a>
+                        </li>
+                        <li class="mb-2">
+                          <a href="" class="link-secondary text-decoration-none">Terms of
+                            Service</a>
+                        </li>
+                        <li class="mb-0">
+                          <a href="" class="link-secondary text-decoration-none">Privacy
+                            Policy</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-3 col-xl-4">
+                    <div class="widget">
+                      <h4 class="widget-title mb-4 fw-bold">Nostra Newsletter</h4>
+                      <p class="mb-4">Subscribe to our newsletter to get our news & discounts
+                        delivered to you.</p>
+                      <form action="">
+                        <div class="row gy-4">
+                          <div class="col-12">
+                            <div class="input-group">
+                              <span class="input-group-text" id="email-newsletter-addon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                                </svg>
+                              </span>
+                              <input type="email" class="form-control" id="email-newsletter" value="" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="d-grid">
+                              <button class="btn btn-warning" type="submit">Invia</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3 col-xl-3">
-                  <div class="widget">
-                    <h4 class="widget-title mb-4 fw-bold">Contattaci</h4>
-                    <address class="mb-4"><a class="link-secondary text-decoration-none" href="https://maps.app.goo.gl/rLgtUrixqP7FiUJU7">Via Grottaferrata
-                        23,Roma,Italia</a>
-                    </address>
-                    <p class="mb-1">
-                      <a class="link-secondary text-decoration-none">(+39)
-                        351-890-2314</a>
-                    </p>
-                    <p class="mb-0">
-                      <a class="link-secondary text-decoration-none">digitalforge@gmail.com</a>
-                    </p>
+              </div>
+            </section>
+            <div class="bg-dark py-4 py-md-5 py-xl-8 text-light font-questrial">
+              <div class="container overflow-hidden">
+                <div class="row gy-4 gy-md-0">
+                  <div class="col-xs-12 col-md-7 order-1 order-md-0">
+                    <div class="copyright text-center text-md-start">
+                      &copy; 2024. All Rights Reserved.
+                    </div>
+                    <div class="credits text-secondary text-center text-md-start mt-2 fs-7">
+                      Built by <a class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with
+                      <span class="text-warning">&#9829</span>
+                    </div>
                   </div>
-                </div>
-                <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                  <div class="widget">
-                    <h4 class="widget-title mb-4 fw-bold">Scopri di piu'</h4>
-                    <ul class="list-unstyled">
-                      <li class="mb-2">
-                        <a href="" class="link-secondary text-decoration-none">About</a>
+
+                  <div class="col-xs-12 col-md-5 order-0 order-md-1">
+                    <ul class="nav justify-content-center justify-content-md-end">
+                      <li class="nav-item">
+                        <a class="nav-link link-warning" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                          </svg>
+                        </a>
                       </li>
-                      <li class="mb-2">
-                        <a href="" class="link-secondary text-decoration-none">Contact</a>
+                      <li class="nav-item">
+                        <a class="nav-link link-warning" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                            <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
+                          </svg>
+                        </a>
                       </li>
-                      <li class="mb-2">
-                        <a href="" class="link-secondary text-decoration-none">Advertise</a>
+                      <li class="nav-item">
+                        <a class="nav-link link-warning" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                          </svg>
+                        </a>
                       </li>
-                      <li class="mb-2">
-                        <a href="" class="link-secondary text-decoration-none">Terms of
-                          Service</a>
-                      </li>
-                      <li class="mb-0">
-                        <a href="" class="link-secondary text-decoration-none">Privacy
-                          Policy</a>
+                      <li class="nav-item">
+                        <a class="nav-link link-warning" href="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                          </svg>
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </div>
-                <div class="col-12 col-lg-3 col-xl-4">
-                  <div class="widget">
-                    <h4 class="widget-title mb-4 fw-bold">Nostra Newsletter</h4>
-                    <p class="mb-4">Subscribe to our newsletter to get our news & discounts
-                      delivered to you.</p>
-                    <form action="">
-                      <div class="row gy-4">
-                        <div class="col-12">
-                          <div class="input-group">
-                            <span class="input-group-text" id="email-newsletter-addon">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                              </svg>
-                            </span>
-                            <input type="email" class="form-control" id="email-newsletter" value="" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="d-grid">
-                            <button class="btn btn-warning" type="submit">Invia</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
               </div>
             </div>
-          </section>
-          <div class="bg-dark py-4 py-md-5 py-xl-8 text-light font-questrial">
-            <div class="container overflow-hidden">
-              <div class="row gy-4 gy-md-0">
-                <div class="col-xs-12 col-md-7 order-1 order-md-0">
-                  <div class="copyright text-center text-md-start">
-                    &copy; 2024. All Rights Reserved.
-                  </div>
-                  <div class="credits text-secondary text-center text-md-start mt-2 fs-7">
-                    Built by <a class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with
-                    <span class="text-warning">&#9829</span>
-                  </div>
-                </div>
-
-                <div class="col-xs-12 col-md-5 order-0 order-md-1">
-                  <ul class="nav justify-content-center justify-content-md-end">
-                    <li class="nav-item">
-                      <a class="nav-link link-warning" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link link-warning" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-                          <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link link-warning" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link link-warning" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                        </svg>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-        <br>
-      </div>
-
-    </div>
-  <?php
-  endif
-  ?>
-  <div class="col bg-dark" id="serialHelpContainer">
-    <nav class="navbar border-top bg-warning border-warning rounded">
-      <div class="container-fluid">
-        <a class="navbar-brand font-questrial fs-3 text-dark d-none d-sm-block fw-bold">
-          Aiuto
-        </a>
-      </div>
-    </nav>
-    <div class="container-fluid overflow-y-auto bg-dark rounded p-4 mt-4" id="style-1">
-      <div class="container-fluid vstack">
-        <div class="container-fluid">
-          <h1 class="text-light fs-2 font-questrial">Contattaci inviandoci una email a questo
-            indirizzo <a href="">digitalforge@gmail.com</a> <br><br>
-            Oppure chiamaci al numero (+39) 351-890-2314
-          </h1>
+          </footer>
           <br>
         </div>
-
       </div>
-      <br><br>
-      <footer class="footer float-bottom border-top border-secondary">
-        <!-- Widgets - Bootstrap Brain Component -->
-        <section class="bg-dark py-4 py-md-5 py-xl-8 text-light border-bottom border-secondary font-questrial">
-          <div class="container overflow-hidden">
-            <div class="row gy-4 gy-lg-0 justify-content-xl-between">
-              <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                <div class="widget">
-                  <a class="text-light fw-bold fs-5 text-decoration-none" href="">
-                    <img src="https://zammad.com/media/pages/product/features/gitlab-integration/693fc93d4d-1698589015/gitlab_integration.png" alt="DIGITALFORGE" width="60" height="60">DIGITALFORGE
-                  </a>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 col-lg-3 col-xl-3">
-                <div class="widget">
-                  <h4 class="widget-title mb-4 fw-bold">Contattaci</h4>
-                  <address class="mb-4"><a class="link-secondary text-decoration-none" href="https://maps.app.goo.gl/rLgtUrixqP7FiUJU7">Via Grottaferrata
-                      23,Roma,Italia</a>
-                  </address>
-                  <p class="mb-1">
-                    <a class="link-secondary text-decoration-none">(+39)
-                      351-890-2314</a>
-                  </p>
-                  <p class="mb-0">
-                    <a class="link-secondary text-decoration-none">digitalforge@gmail.com</a>
-                  </p>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-                <div class="widget">
-                  <h4 class="widget-title mb-4 fw-bold">Scopri di piu'</h4>
-                  <ul class="list-unstyled">
-                    <li class="mb-2">
-                      <a href="" class="link-secondary text-decoration-none">About</a>
-                    </li>
-                    <li class="mb-2">
-                      <a href="" class="link-secondary text-decoration-none">Contact</a>
-                    </li>
-                    <li class="mb-2">
-                      <a href="" class="link-secondary text-decoration-none">Advertise</a>
-                    </li>
-                    <li class="mb-2">
-                      <a href="" class="link-secondary text-decoration-none">Terms of
-                        Service</a>
-                    </li>
-                    <li class="mb-0">
-                      <a href="" class="link-secondary text-decoration-none">Privacy
-                        Policy</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-12 col-lg-3 col-xl-4">
-                <div class="widget">
-                  <h4 class="widget-title mb-4 fw-bold">Nostra Newsletter</h4>
-                  <p class="mb-4">Subscribe to our newsletter to get our news & discounts
-                    delivered to you.</p>
-                  <form action="">
-                    <div class="row gy-4">
-                      <div class="col-12">
-                        <div class="input-group">
-                          <span class="input-group-text" id="email-newsletter-addon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                            </svg>
-                          </span>
-                          <input type="email" class="form-control" id="email-newsletter" value="" placeholder="Email Address" aria-label="email-newsletter" aria-describedby="email-newsletter-addon" required>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div class="d-grid">
-                          <button class="btn btn-warning" type="submit">Invia</button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="bg-dark py-4 py-md-5 py-xl-8 text-light font-questrial">
-          <div class="container overflow-hidden">
-            <div class="row gy-4 gy-md-0">
-              <div class="col-xs-12 col-md-7 order-1 order-md-0">
-                <div class="copyright text-center text-md-start">
-                  &copy; 2024. All Rights Reserved.
-                </div>
-                <div class="credits text-secondary text-center text-md-start mt-2 fs-7">
-                  Built by <a class="link-secondary text-decoration-none">DigitalForgeBrain W.F.</a> with
-                  <span class="text-warning">&#9829</span>
-                </div>
-              </div>
 
-              <div class="col-xs-12 col-md-5 order-0 order-md-1">
-                <ul class="nav justify-content-center justify-content-md-end">
-                  <li class="nav-item">
-                    <a class="nav-link link-warning" href="">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link link-warning" href="">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link link-warning" href="">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link link-warning" href="">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <br>
-    </div>
-  </div>
-
-  <script type="text/javascript">
-    $(function() {
-      $("#cerca-prodotto-input").autocomplete({
-        source: '../php/control.php',
-      });
-    });
-  </script>
+      <script type="text/javascript">
+        $(function() {
+          $("#cerca-prodotto-input").autocomplete({
+            source: '../php/control.php',
+          });
+        });
+      </script>
 </body>
 
 

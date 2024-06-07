@@ -3,8 +3,9 @@
 - continua nello sviluppo della parte aggiungi prodotto
   - sistema la parte di stampa del prodotto aggiunto 
 
-fare parte di filtraggio
+
 
 abortire sessione 
-
-aggiustare la ricerca - quando uno cerca e cambia pagina e poi torna la ricerca deve rimanere 
+controllo perche le immagini non scoronno nel carosel 
+hashing password
+mettere password dimenticata
