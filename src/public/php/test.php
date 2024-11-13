@@ -3,7 +3,7 @@ require "vendor/autoload.php";
 use \GeminiAPI\Client;
 use \GeminiAPI\Resources\Parts\TextPart;
 
-$client = new Client('AIzaSyAqRQNjkwPj2aK_u7xtspMYGirgiRHXh7s');
+$client = new Client('API_KEY');
 $response = $client->geminiPro()->generateContent(
     new TextPart('PHP in less than 100 chars'),
 );
